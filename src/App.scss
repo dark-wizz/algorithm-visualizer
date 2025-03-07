@@ -46,4 +46,23 @@ html, body, #root{
 .player {
   display: grid;
   grid-template-columns: 0.7fr;
+  grid-template-rows: 1fr 1fr;
+  place-items: center;
+}
+.player .MuiLinearProgress-root{
+  justify-self: stretch;
+  background-color: gray;
+   *{
+     background-color: black;
+  }
+}
+
+.player .player_control{
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 0.5em 1em;
+  display: grid;
+  grid-auto-flow: column;
+  place-items: center;
+  gap: 1em;
 }

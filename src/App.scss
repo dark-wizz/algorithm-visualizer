@@ -1,0 +1,49 @@
+*{
+  box-sizing: border-box;
+}
+html, body, #root{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.body {
+  display: grid;
+  grid-template-rows: 1fr;
+  height: 100%;
+}
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 0.5em;
+  gap: 1em;
+}
+.header{
+  padding: 0.4em;
+}
+.display{
+  height: 100%;
+  gap: 1em;
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+  grid-template-rows: 5fr 2fr;
+}
+
+.display>*, .header{
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: grid;
+  place-content: center;
+  padding: 0.5em;
+}
+
+.control{
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  place-items: center;
+}
+
+.player {
+  display: grid;
+  grid-template-columns: 0.7fr;
+}

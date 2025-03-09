@@ -17,10 +17,13 @@ const codes = [
 
 const Code = () => {
   return <div className="code">
+    <div className="wrap">
+
     {codes.map((v,i)=>{
-      return <p key={i}>{v}</p>
+      return <pre key={i}>{v}</pre>
     })}
   </div>
+    </div>
 }
 
 export default Code;

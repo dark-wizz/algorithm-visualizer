@@ -4,6 +4,7 @@ const Bars = ({val}) => {
     <div className="bar"
       style={{
           border: "1px solid black",
+          backgroundColor: "gray",
           width: "1em",
           height: `${val}em`,
       }}

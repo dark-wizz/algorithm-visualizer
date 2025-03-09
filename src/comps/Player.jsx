@@ -5,17 +5,23 @@ import SkipNextOutlinedIcon from '@mui/icons-material/SkipNextOutlined';
 import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
+import Select from '@mui/material/Select';
 
 
 const Player = () => {
   return <div className="player">
     <LinearProgress variant="determinate" value={10} />
     <div className="player_control">
-      <RestartAltOutlinedIcon /> 
-      <SkipPreviousOutlinedIcon />
-      <PlayCircleFilledWhiteOutlinedIcon />
-      <SkipNextOutlinedIcon />
-      <AutoFixHighOutlinedIcon />
+      <Select 
+
+      />
+      <div className="buttons">
+        <RestartAltOutlinedIcon /> 
+        <SkipPreviousOutlinedIcon />
+        <PlayCircleFilledWhiteOutlinedIcon />
+        <SkipNextOutlinedIcon />
+        <AutoFixHighOutlinedIcon />
+      </div>
     </div>
   </div>
 }

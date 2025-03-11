@@ -14,15 +14,16 @@ import FormControl from '@mui/material/FormControl';
 
 const Player = () => {
   return <div className="player">
-    <Slider />
-     <div className="player_control">
-      <FormControl sx={{ minWidth: 50 }} size="small">
+    <div className="wrap">
+      <Slider />
+      <div className="player_control">
+      <FormControl sx={{ minWidth: "3em" }} size="small">
         <InputLabel id="player_speed_label">speed</InputLabel>
         <Select
           labelId="player_speed_label"
           id="player_speed"
-          value={1}
           label="speed"
+          value="1"
           autoWidth
         >
           <MenuItem value={0.5}>0.5x</MenuItem>
@@ -42,6 +43,7 @@ const Player = () => {
         <InputLabel id="player_speed_label">size</InputLabel>
         <Input type="number" defaultValue={10}/>
       </FormControl>
+      </div>
     </div>
   </div>
 }

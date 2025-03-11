@@ -1,6 +1,6 @@
 const Header = () => {
   return <div className="header">
-    Header
+    <h2>Bubble Sort</h2>
   </div>
 }
 

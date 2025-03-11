@@ -1,6 +1,6 @@
 import Bar from "./Bar"
 import Code from "./Code";
-import Control from "./Control";
+import About from "./About";
 import Player from "./Player";
 
 const Display = () => {
@@ -17,7 +17,7 @@ const Display = () => {
     
     <Code />
     <Player />
-    <Control />
+    <About />
 
   </div>
 }

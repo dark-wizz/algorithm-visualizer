@@ -1,9 +1,21 @@
+import {motion} from "motion/react"
 import Bar from "./Bar"
 import Code from "./Code";
 import About from "./About";
 import Player from "./Player";
+import { useState } from "react";
+import { useEffect } from "react";
+import { genRandomArr } from "../utils/funcs";
 
 const Display = () => {
+  
+  const [vals, setVals] = useState([]);
+  const [size, setSize] = useState(10)
+
+  useEffect(()=>{
+    setVals(genRandomArr(2, 10, size))
+  },[size])
+
   return <div className="display">
     <div className="bars"
       style={{
@@ -12,11 +24,11 @@ const Display = () => {
           alignItems: "flex-end",
       }}
     >
-    {Array.from({length: 12}, (_,i)=>i).map(i => <Bar val={i}/>)}
+    {vals.map(i => <Bar val={i}/>)}
     </div>
     
     <Code />
-    <Player />
+    <Player size={size} setSize={setSize} setVals={setVals} />
     <About />
 
   </div>

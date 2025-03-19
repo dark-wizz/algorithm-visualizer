@@ -10,9 +10,18 @@ import InputLabel from '@mui/material/InputLabel';
 import Input from '@mui/material/Input';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { genRandomArr } from '../utils/funcs';
 
 
-const Player = () => {
+const Player = (p) => {
+
+  const onGen = () => {
+    p.setVals(genRandomArr(2,10,p.size))
+  }
+  const onSizeChange = (e) => {
+    p.setSize(e.target.value)
+  }
+
   return <div className="player">
     <div className="wrap">
       <Slider />
@@ -45,13 +54,13 @@ const Player = () => {
         <div class="next">
           <SkipNextOutlinedIcon />
         </div>
-        <div class="gen">
+        <div class="gen" onClick={onGen}>
           <AutoFixHighOutlinedIcon />
         </div>
       </div>
       <FormControl sx={{ width: "5em" }} size="small">
         <InputLabel id="player_speed_label">size</InputLabel>
-        <Input type="number" defaultValue={10}/>
+        <Input type="number" defaultValue={10} onChange={onSizeChange}/>
       </FormControl>
       </div>
     </div>

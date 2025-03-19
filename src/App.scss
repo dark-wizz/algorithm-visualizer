@@ -86,6 +86,10 @@ html, body, #root{
     grid-auto-flow: column;
     place-items: center;
     gap: 1em;
+    >*:hover{
+      background-color: gray;
+      cursor: pointer;  
+    }
   }
 }
 

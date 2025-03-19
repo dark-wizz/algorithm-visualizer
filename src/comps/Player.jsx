@@ -33,11 +33,21 @@ const Player = () => {
         </Select>
       </FormControl>
       <div className="buttons">
-        <RestartAltOutlinedIcon /> 
-        <SkipPreviousOutlinedIcon />
-        <PlayCircleFilledWhiteOutlinedIcon />
-        <SkipNextOutlinedIcon />
-        <AutoFixHighOutlinedIcon />
+        <div className="restart">
+          <RestartAltOutlinedIcon /> 
+        </div>
+        <div className="prev">
+          <SkipPreviousOutlinedIcon />
+        </div>
+        <div className="play">
+          <PlayCircleFilledWhiteOutlinedIcon />
+        </div>
+        <div class="next">
+          <SkipNextOutlinedIcon />
+        </div>
+        <div class="gen">
+          <AutoFixHighOutlinedIcon />
+        </div>
       </div>
       <FormControl sx={{ width: "5em" }} size="small">
         <InputLabel id="player_speed_label">size</InputLabel>

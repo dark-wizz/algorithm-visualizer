@@ -5,29 +5,31 @@ import Player from "./Player";
 import { useState } from "react";
 import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
+import { useAnimate } from "motion/react";
 
 const Display = () => {
   
   const [vals, setVals] = useState([]);
   const [size, setSize] = useState(10)
+  const [scope, animate] = useAnimate()
 
   useEffect(()=>{
     setVals(genRandomArr(2, 10, size))
   },[size])
 
   return <div className="display">
-    <div className="bars"
+    <div className="bars" ref={scope}
       style={{
           display: "flex",
           gap: "1em",
           alignItems: "flex-end",
       }}
     >
-    {vals.map(i => <Bar val={i}/>)}
+    {vals.map((v, k) => <Bar val={v} id={k}/>)}
     </div>
     
     <Code />
-    <Player size={size} setSize={setSize} vals={vals} setVals={setVals} />
+    <Player animate={animate} size={size} setSize={setSize} vals={vals} setVals={setVals} />
     <About />
 
   </div>

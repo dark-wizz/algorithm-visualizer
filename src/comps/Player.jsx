@@ -12,13 +12,15 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { genRandomArr } from '../utils/funcs';
 import bubbleSort from '../utils/algos/bubbleSort';
+import { bubbleLog } from '../utils/logToAnim';
 
 
 const Player = (p) => {
 
   const onPlay = () => {
     const log = bubbleSort([...p.vals])
-    console.log(log)
+    const seq = bubbleLog(log)
+    p.animate(seq)
   }
 
   const onGen = () => {

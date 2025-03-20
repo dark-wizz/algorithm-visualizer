@@ -5,8 +5,8 @@ export default function bubbleSort(arr){
   for (let i = 0; i < n - 1; i++){
     swapped = false;
     for (let j = 0; j < n - i - 1; j++){
-      let log = {i:j,j:j+1,swap:false}
-      if (arr[j] > arr[j + 1]){
+      let log = {i: j, i_id:arr[j].i,j:j+1, j_id:arr[j+1].i,swap:false}
+      if (arr[j].v > arr[j + 1].v){
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;

@@ -19,7 +19,7 @@ const Player = (p) => {
 
   const onPlay = () => {
     const log = bubbleSort([...p.vals])
-    const seq = bubbleLog(log)
+    const seq = bubbleLog(log, p.vals)
     p.animate(seq)
   }
 
@@ -68,7 +68,7 @@ const Player = (p) => {
       </div>
       <FormControl sx={{ width: "5em" }} size="small">
         <InputLabel id="player_speed_label">size</InputLabel>
-        <Input type="number" defaultValue={10} onChange={onSizeChange}/>
+        <Input type="number" defaultValue={p.size} onChange={onSizeChange}/>
       </FormControl>
       </div>
     </div>

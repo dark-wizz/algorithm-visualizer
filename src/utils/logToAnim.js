@@ -11,32 +11,28 @@ import { xFromTranslate } from "./funcs"
 const red = "#ef0000"
 const green = "#00ef00"
 
-export const bubbleLog = (log) => {
+export const bubbleLog = (log, vals) => {
   let seq = []
   for(let l of log){
     seq.push(
-      [`#b${l.i}`, {y: "-2em"}],
-      [`#b${l.j}`, {y: "-2em"},{at:"<"}],
-      [`#b${l.i}`, {y: "0em"}],
-      [`#b${l.j}`, {y: "0em"},{at:"<"}],
+      [`#b${l.i_id}`, {y: "-2em"}],
+      [`#b${l.j_id}`, {y: "-2em"},{at:"<"}],
+      [`#b${l.i_id}`, {y: "0em"}],
+      [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
     )
     if (l.swap){
-      let b1 = document.getElementById(`b${l.i}`);
-      let b2 = document.getElementById(`b${l.j}`);
-
-      let x1 = xFromTranslate(b1.style.transform);
-      let x2 = xFromTranslate(b2.style.transform);
-      const distance = l.j - l.i;
+      let b1 = document.getElementById(`b${l.i_id}`);
+      let b2 = document.getElementById(`b${l.j_id}`);
 
       seq.push(
         [b1,
           {
-            x: `${x1 + distance * 2}em`,
+            x: `${2 * (l.i - l.i_id) + 2}em`,
           },
         ],
         [b2,
           {
-            x: `${x2 - distance * 2}em`,
+            x: `${2 * (l.j - l.j_id) - 2}em`,
           },
           {
             at: "<"

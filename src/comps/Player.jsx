@@ -11,9 +11,15 @@ import Input from '@mui/material/Input';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { genRandomArr } from '../utils/funcs';
+import bubbleSort from '../utils/algos/bubbleSort';
 
 
 const Player = (p) => {
+
+  const onPlay = () => {
+    const log = bubbleSort([...p.vals])
+    console.log(log)
+  }
 
   const onGen = () => {
     p.setVals(genRandomArr(2,10,p.size))
@@ -48,13 +54,13 @@ const Player = (p) => {
         <div className="prev">
           <SkipPreviousOutlinedIcon />
         </div>
-        <div className="play">
+        <div className="play" onClick={onPlay}>
           <PlayCircleFilledWhiteOutlinedIcon />
         </div>
-        <div class="next">
+        <div className="next">
           <SkipNextOutlinedIcon />
         </div>
-        <div class="gen" onClick={onGen}>
+        <div className="gen" onClick={onGen}>
           <AutoFixHighOutlinedIcon />
         </div>
       </div>

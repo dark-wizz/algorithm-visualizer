@@ -1,4 +1,3 @@
-import {motion} from "motion/react"
 import Bar from "./Bar"
 import Code from "./Code";
 import About from "./About";
@@ -28,7 +27,7 @@ const Display = () => {
     </div>
     
     <Code />
-    <Player size={size} setSize={setSize} setVals={setVals} />
+    <Player size={size} setSize={setSize} vals={vals} setVals={setVals} />
     <About />
 
   </div>

@@ -13,21 +13,39 @@ import FormControl from '@mui/material/FormControl';
 import { genRandomArr } from '../utils/funcs';
 import bubbleSort from '../utils/algos/bubbleSort';
 import { bubbleLog } from '../utils/logToAnim';
+import { useState } from 'react';
 
 
 const Player = (p) => {
 
+  const [playing, setPlaying] = useState(false)
+  const [control, setControl] = useState(null)
+
   const onPlay = () => {
-    const log = bubbleSort([...p.vals])
-    const seq = bubbleLog(log, p.vals)
-    p.animate(seq)
+    if(!p.started){
+      const log = bubbleSort([...p.vals])
+      const seq = bubbleLog(log, p.vals)
+      setControl(p.animate(seq))
+    }
+    p.setStarted(true)
+    setPlaying(p => !p)
+    if(!control) return;
+    if(playing){
+      control.pause()
+    }else{
+      control.play()
+    }
   }
 
   const onGen = () => {
-    p.setVals(genRandomArr(2,10,p.size))
+    p.setVals(genRandomArr(2,20,p.size))
   }
   const onSizeChange = (e) => {
     p.setSize(e.target.value)
+  }
+
+  const onRestart = () => {
+    control.cancel()
   }
 
   return <div className="player">
@@ -50,14 +68,15 @@ const Player = (p) => {
         </Select>
       </FormControl>
       <div className="buttons">
-        <div className="restart">
+        <div className="restart" onClick={onRestart}>
           <RestartAltOutlinedIcon /> 
         </div>
         <div className="prev">
           <SkipPreviousOutlinedIcon />
         </div>
         <div className="play" onClick={onPlay}>
-          <PlayCircleFilledWhiteOutlinedIcon />
+          {!playing && <PlayCircleFilledWhiteOutlinedIcon />}
+          {playing && <PauseCircleOutlineOutlinedIcon />}
         </div>
         <div className="next">
           <SkipNextOutlinedIcon />

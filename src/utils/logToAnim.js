@@ -1,12 +1,3 @@
-import { xFromTranslate } from "./funcs"
-[
-  { "i": 0, "j": 1, "swap": true },
-  { "i": 1, "j": 2, "swap": true },
-  { "i": 2, "j": 3, "swap": true },
-  { "i": 0, "j": 1, "swap": true },
-  { "i": 1, "j": 2, "swap": false },
-  { "i": 0, "j": 1, "swap": false }
-]
 
 const red = "#ef0000"
 const green = "#00ef00"

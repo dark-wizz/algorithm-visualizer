@@ -10,27 +10,38 @@ import { useAnimate } from "motion/react";
 const Display = () => {
   
   const [vals, setVals] = useState([]);
-  const [size, setSize] = useState(4)
+  const [size, setSize] = useState(10)
+  const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
+  const [started, setStarted] = useState(false)
 
   useEffect(()=>{
-    // setVals(genRandomArr(2, 10, size))
-    setVals([{i:0, v:6}, {i:1, v:8}, {i:2, v:4}, {i:3, v:10}])
+    setVals(genRandomArr(2, 20, size))
   },[size])
 
+  useEffect(()=>{
+    setStarted(false)
+    setRkey(p=>p+1)
+  },[vals,size])
+
   return <div className="display">
-    <div className="bars" ref={scope}
+    <div className="bars" ref={scope} key={rkey}
       style={{
           display: "flex",
           gap: "1em",
           alignItems: "flex-end",
       }}
     >
-    {vals.map((v, k) => <Bar val={v.v} id={k}/>)}
+    {vals.map((v, k) => <Bar val={v.v} id={k} key={k}/>)}
     </div>
     
     <Code />
-    <Player animate={animate} size={size} setSize={setSize} vals={vals} setVals={setVals} />
+    <Player
+      animate={animate} size={size}
+      setSize={setSize} vals={vals}
+      setVals={setVals} setRkey={setRkey}
+      started={started} setStarted={setStarted}
+    />
     <About />
 
   </div>

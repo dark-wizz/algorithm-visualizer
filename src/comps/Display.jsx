@@ -13,14 +13,12 @@ const Display = () => {
   const [size, setSize] = useState(10)
   const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
-  const [started, setStarted] = useState(false)
 
   useEffect(()=>{
     setVals(genRandomArr(2, 20, size))
   },[size])
 
   useEffect(()=>{
-    setStarted(false)
     setRkey(p=>p+1)
   },[vals,size])
 
@@ -40,7 +38,6 @@ const Display = () => {
       animate={animate} size={size}
       setSize={setSize} vals={vals}
       setVals={setVals} setRkey={setRkey}
-      started={started} setStarted={setStarted}
     />
     <About />
 

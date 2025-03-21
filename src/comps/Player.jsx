@@ -14,27 +14,50 @@ import { genRandomArr } from '../utils/funcs';
 import bubbleSort from '../utils/algos/bubbleSort';
 import { bubbleLog } from '../utils/logToAnim';
 import { useState } from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 
 const Player = (p) => {
 
   const [playing, setPlaying] = useState(false)
   const [control, setControl] = useState(null)
+  const [started, setStarted] = useState(false)
+  const [seq, setSeq] = useState([])
 
-  const onPlay = () => {
-    if(!p.started){
+  const cancelRef = useRef(false)
+  const currStepRef = useRef(0)
+
+  useEffect(()=>{
+    cancelRef.current = true
+    currStepRef.current = 0
+    if (control) control.stop()
+    setStarted(false)
+  },[p.size, p.vals])
+
+  const onPlay = async() => {
+    cancelRef.current = false
+    if(!started){
+      setStarted(true)
       const log = bubbleSort([...p.vals])
       const seq = bubbleLog(log, p.vals)
-      setControl(p.animate(seq))
+      setSeq(seq)
+      while(currStepRef.current<seq.length){
+        if(cancelRef.current) break;
+        console.log()
+        const ctrl = p.animate(seq[currStepRef.current++])
+        setControl(ctrl)
+        await ctrl
+      }
     }
-    p.setStarted(true)
-    setPlaying(p => !p)
-    if(!control) return;
-    if(playing){
-      control.pause()
-    }else{
-      control.play()
-    }
+  }
+
+  const onNext = () => {
+    cancelRef.current = true
+    setStarted(false)
+    if(currStepRef.current < seq.length)
+      console.log(seq)
+      p.animate(seq[currStepRef.current++])
   }
 
   const onGen = () => {
@@ -78,7 +101,7 @@ const Player = (p) => {
           {!playing && <PlayCircleFilledWhiteOutlinedIcon />}
           {playing && <PauseCircleOutlineOutlinedIcon />}
         </div>
-        <div className="next">
+        <div className="next" onClick={onNext}>
           <SkipNextOutlinedIcon />
         </div>
         <div className="gen" onClick={onGen}>

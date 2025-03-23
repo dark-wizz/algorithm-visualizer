@@ -99,6 +99,8 @@ const Player = (p) => {
   return <div className="player">
     <div className="wrap">
       <Slider 
+        max={stepsRef.current.length}
+        value={currStepRef.current}
       />
       <div className="player_control">
       <FormControl sx={{ minWidth: "3em" }} size="small">

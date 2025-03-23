@@ -53,7 +53,8 @@ const Player = (p) => {
     setPlaying(p=>!p)
     while(currStepRef.current<stepsRef.current.length){
       if(cancelRef.current || !playingRef.current) break;
-      const ctrl = p.animate(stepsRef.current[currStepRef.current++])
+      // p.setDesc(stepsRef.current[currStepRef.current].desc)
+      const ctrl = p.animate(stepsRef.current[currStepRef.current++].animation)
       setControl(ctrl)
       await ctrl
     }
@@ -64,7 +65,8 @@ const Player = (p) => {
     cancelRef.current = true
     setStarted(false)
     if(currStepRef.current < stepsRef.current.length)
-      p.animate(stepsRef.current[currStepRef.current++])
+      p.setDesc(stepsRef.current[currStepRef.current].desc)
+      p.animate(stepsRef.current[currStepRef.current++].animation)
   }
 
   const onGen = () => {

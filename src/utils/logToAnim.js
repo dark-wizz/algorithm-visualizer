@@ -15,49 +15,51 @@ export const bubbleLog = (log) => {
 
 function animCode(l, seq){
   seq.push(
-    Array.from({length:13}).map((v,i) => {
-    return [
-      `#c${i-1}`, {backgroundColor: white}, {duration: 0}
-    ]})
-  )
-  seq.push(
     ...l.lines.map((v,i) => {
-    return [
-        ...Array.from({length:13}).map((v,i) => {
-          return [
-            `#c${i-1}`, {backgroundColor: white}, {duration: 0}
-          ]}),
-        [`#c${v-1}`, {backgroundColor: green}]
-      ]})
+    return {
+        animation: [
+          ...Array.from({length:13}).map((v,i) => [
+              `#c${i-1}`, {backgroundColor: white}, {duration: 0}
+          ]),
+          [`#c${v-1}`, {backgroundColor: green}]
+      ],
+      desc: l.desc
+    };
+    })
   )
 }
 
 function animCheckBars (l, seq){
-  seq.push([
-    [`#b${l.i_id}`, {y: "-2em"}],
-    // [`#c${l.i_id}`, {y: "-2em"}],
-    [`#b${l.j_id}`, {y: "-2em"},{at:"<"}],
-    [`#b${l.i_id}`, {y: "0em"}],
-    [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
-  ])
+  seq.push({
+    animation:[
+      [`#b${l.i_id}`, {y: "-2em"}],
+      [`#b${l.j_id}`, {y: "-2em"},{at:"<"}],
+      [`#b${l.i_id}`, {y: "0em"}],
+      [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
+    ],
+    desc: l.desc  
+  })
 }
 function animswapBars(l, seq){
   let b1 = document.getElementById(`b${l.i_id}`);
   let b2 = document.getElementById(`b${l.j_id}`);
 
-  seq.push([
-    [b1,
-      {
-        x: `${2 * (l.i - l.i_id) + 2}em`,
-      },
+  seq.push({
+    animation:[
+      [b1,
+        {
+          x: `${2 * (l.i - l.i_id) + 2}em`,
+        },
+      ],
+      [b2,
+        {
+          x: `${2 * (l.j - l.j_id) - 2}em`,
+        },
+        {
+          at: "<"
+        },
+      ], 
     ],
-    [b2,
-      {
-        x: `${2 * (l.j - l.j_id) - 2}em`,
-      },
-      {
-        at: "<"
-      },
-    ], 
-  ])
+    desc: l.desc
+  })
 }

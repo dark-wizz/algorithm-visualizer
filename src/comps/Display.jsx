@@ -14,9 +14,12 @@ const Display = () => {
   const [size, setSize] = useState(10)
   const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
-  const stepsRef = useRef([])
-  const currStepsRef = useRef(0)
+  const [desc, setDesc] = useState("")
 
+
+  useEffect(()=>{
+    console.log("rendered")
+  })
   useEffect(()=>{
     setVals(genRandomArr(2, 20, size))
   },[size])
@@ -41,9 +44,11 @@ const Display = () => {
       animate={animate} size={size}
       setSize={setSize} vals={vals}
       setVals={setVals} setRkey={setRkey}
-      stepsRef={stepsRef} currStepsRef={currStepsRef}
+      setDesc={setDesc}
     />
-    <About />
+    <About 
+      desc={desc}
+    />
 
   </div>
 }

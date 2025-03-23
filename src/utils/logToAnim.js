@@ -37,7 +37,7 @@ function animCheckBars (l, seq){
       [`#b${l.i_id}`, {y: "0em"}],
       [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
     ],
-    desc: l.desc  
+    desc: "comparing bars..." 
   })
 }
 function animswapBars(l, seq){
@@ -60,6 +60,6 @@ function animswapBars(l, seq){
         },
       ], 
     ],
-    desc: l.desc
+    desc: "swapping bars..."
   })
 }

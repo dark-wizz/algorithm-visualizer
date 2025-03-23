@@ -16,6 +16,7 @@ import { bubbleLog } from '../utils/logToAnim';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { useDesc } from './contexts/DescProvider';
 
 
 const Player = (p) => {
@@ -24,6 +25,8 @@ const Player = (p) => {
   const [control, setControl] = useState(null)
   const [started, setStarted] = useState(false)
   const stepsRef = useRef([])
+
+  const {setDesc} = useDesc()
 
   const cancelRef = useRef(false)
   const currStepRef = useRef(0)
@@ -53,7 +56,7 @@ const Player = (p) => {
     setPlaying(p=>!p)
     while(currStepRef.current<stepsRef.current.length){
       if(cancelRef.current || !playingRef.current) break;
-      // p.setDesc(stepsRef.current[currStepRef.current].desc)
+      setDesc(stepsRef.current[currStepRef.current].desc)
       const ctrl = p.animate(stepsRef.current[currStepRef.current++].animation)
       setControl(ctrl)
       await ctrl
@@ -65,7 +68,7 @@ const Player = (p) => {
     cancelRef.current = true
     setStarted(false)
     if(currStepRef.current < stepsRef.current.length)
-      p.setDesc(stepsRef.current[currStepRef.current].desc)
+      setDesc(stepsRef.current[currStepRef.current].desc)
       p.animate(stepsRef.current[currStepRef.current++].animation)
   }
 

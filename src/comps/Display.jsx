@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
 import { useAnimate } from "motion/react";
 import { useRef } from "react";
+import DescProvider from "./contexts/DescProvider";
 
 const Display = () => {
   
@@ -14,7 +15,6 @@ const Display = () => {
   const [size, setSize] = useState(10)
   const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
-  const [desc, setDesc] = useState("")
 
 
   useEffect(()=>{
@@ -40,15 +40,15 @@ const Display = () => {
     </div>
     
     <Code />
-    <Player
-      animate={animate} size={size}
-      setSize={setSize} vals={vals}
-      setVals={setVals} setRkey={setRkey}
-      setDesc={setDesc}
-    />
-    <About 
-      desc={desc}
-    />
+    <DescProvider>
+      <Player
+        animate={animate} size={size}
+        setSize={setSize} vals={vals}
+        setVals={setVals} setRkey={setRkey}
+      />
+      <About 
+      />
+    </DescProvider>
 
   </div>
 }

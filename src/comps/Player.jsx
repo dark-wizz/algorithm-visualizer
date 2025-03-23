@@ -23,8 +23,10 @@ const Player = (p) => {
 
   const [playing, setPlaying] = useState(false)
   const [control, setControl] = useState(null)
-  const [started, setStarted] = useState(false)
   const stepsRef = useRef([])
+
+  const [speed, setSpeed] = useState(1);
+  const speedRef = useRef(1)
 
   const {setDesc} = useDesc()
 
@@ -36,6 +38,11 @@ const Player = (p) => {
     playingRef.current = playing;
   },[playing])
 
+  useEffect(()=>{
+    speedRef.current=speed;
+  },[speed])
+
+  const [started, setStarted] = useState(false)
   useEffect(()=>{
     const log = bubbleSort([...p.vals])
     const seq = bubbleLog(log, p.vals)
@@ -58,6 +65,7 @@ const Player = (p) => {
       if(cancelRef.current || !playingRef.current) break;
       setDesc(stepsRef.current[currStepRef.current].desc)
       const ctrl = p.animate(stepsRef.current[currStepRef.current++].animation)
+      ctrl.speed = speedRef.current
       setControl(ctrl)
       await ctrl
     }
@@ -70,6 +78,11 @@ const Player = (p) => {
     if(currStepRef.current < stepsRef.current.length)
       setDesc(stepsRef.current[currStepRef.current].desc)
       p.animate(stepsRef.current[currStepRef.current++].animation)
+  }
+
+  const onSpeedSelect = (e) => {
+    console.log(e.target.value)
+    setSpeed(e.target.value)
   }
 
   const onGen = () => {
@@ -85,7 +98,8 @@ const Player = (p) => {
 
   return <div className="player">
     <div className="wrap">
-      <Slider />
+      <Slider 
+      />
       <div className="player_control">
       <FormControl sx={{ minWidth: "3em" }} size="small">
         <InputLabel id="player_speed_label">speed</InputLabel>
@@ -93,13 +107,16 @@ const Player = (p) => {
           labelId="player_speed_label"
           id="player_speed"
           label="speed"
-          value="1"
+          defaultValue="1"
           autoWidth
+          onChange={onSpeedSelect}
         >
+          <MenuItem value={0.25}>0.25x</MenuItem>
           <MenuItem value={0.5}>0.5x</MenuItem>
           <MenuItem value={1}>1x</MenuItem>
           <MenuItem value={1.5}>1.5x</MenuItem>
           <MenuItem value={2}>2x</MenuItem>
+          <MenuItem value={3}>3x</MenuItem>
         </Select>
       </FormControl>
       <div className="buttons">
@@ -121,7 +138,7 @@ const Player = (p) => {
         </div>
       </div>
       <FormControl sx={{ width: "5em" }} size="small">
-        <InputLabel id="player_speed_label">size</InputLabel>
+        <InputLabel id="player_size_label">size</InputLabel>
         <Input type="number" defaultValue={p.size} onChange={onSizeChange}/>
       </FormControl>
       </div>

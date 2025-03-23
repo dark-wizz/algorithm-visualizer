@@ -1,18 +1,18 @@
 
 const codes = [
-  "procedure bubbleSort(A : list of sortable items)",
-  "  n := length(A)",
-  "  repeat",
-  "      swapped := false",
-  "      for i := 1 to n - 1 inclusive do",
-  "          if A[i - 1] > A[i] then",
-  "              swap(A[i - 1], A[i])",
-  "              swapped := true",
-  "          end if",
-  "      end for",
-  "      n := n - 1",
-  "  until not swapped",
-  "end procedure",
+  "FUNCTION bubbleSort(arr):",
+  "  n ← length of arr",
+  "  FOR i FROM 0 TO n - 1:",
+  "    swapped ← false",
+  "    FOR j FROM 0 TO n - i - 1:",
+  "      IF arr[j].v > arr[j + 1].v:",
+  "        SWAP arr[j] WITH arr[j + 1]",
+  "        swapped ← true",
+  "    END FOR",
+  "    IF swapped = false:",
+  "      BREAK",
+  "  END FOR",
+  "END FUNCTION"
 ]
 
 const Code = () => {
@@ -20,7 +20,7 @@ const Code = () => {
     <div className="wrap">
 
     {codes.map((v,i)=>{
-      return <pre key={i}>{v}</pre>
+      return <pre id={`c${i}`} key={i}>{i+1} {v}</pre>
     })}
   </div>
     </div>

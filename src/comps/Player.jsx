@@ -23,12 +23,24 @@ const Player = (p) => {
   const [playing, setPlaying] = useState(false)
   const [control, setControl] = useState(null)
   const [started, setStarted] = useState(false)
-  const [seq, setSeq] = useState([])
+  const stepsRef = useRef([])
 
   const cancelRef = useRef(false)
   const currStepRef = useRef(0)
+  const playingRef = useRef(false)
 
   useEffect(()=>{
+    playingRef.current = playing;
+  },[playing])
+
+  useEffect(()=>{
+    const log = bubbleSort([...p.vals])
+    const seq = bubbleLog(log, p.vals)
+    stepsRef.current = seq
+  })
+
+  useEffect(()=>{
+
     cancelRef.current = true
     currStepRef.current = 0
     if (control) control.stop()
@@ -37,27 +49,22 @@ const Player = (p) => {
 
   const onPlay = async() => {
     cancelRef.current = false
-    if(!started){
-      setStarted(true)
-      const log = bubbleSort([...p.vals])
-      const seq = bubbleLog(log, p.vals)
-      setSeq(seq)
-      while(currStepRef.current<seq.length){
-        if(cancelRef.current) break;
-        console.log()
-        const ctrl = p.animate(seq[currStepRef.current++])
-        setControl(ctrl)
-        await ctrl
-      }
+    playingRef.current = !playingRef.current
+    setPlaying(p=>!p)
+    while(currStepRef.current<stepsRef.current.length){
+      if(cancelRef.current || !playingRef.current) break;
+      const ctrl = p.animate(stepsRef.current[currStepRef.current++])
+      setControl(ctrl)
+      await ctrl
     }
   }
 
   const onNext = () => {
+    setPlaying(false)
     cancelRef.current = true
     setStarted(false)
-    if(currStepRef.current < seq.length)
-      console.log(seq)
-      p.animate(seq[currStepRef.current++])
+    if(currStepRef.current < stepsRef.current.length)
+      p.animate(stepsRef.current[currStepRef.current++])
   }
 
   const onGen = () => {

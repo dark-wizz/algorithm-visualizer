@@ -24,6 +24,7 @@ const Player = (p) => {
   const [playing, setPlaying] = useState(false)
   const [control, setControl] = useState(null)
   const stepsRef = useRef([])
+  const counterStepsRef = useRef([])
 
   const [speed, setSpeed] = useState(1);
   const speedRef = useRef(1)
@@ -44,8 +45,9 @@ const Player = (p) => {
 
   useEffect(()=>{
     const log = bubbleSort([...p.vals])
-    const seq = bubbleLog(log, p.vals)
-    stepsRef.current = seq
+    const {steps, counterSteps} = bubbleLog(log, p.vals)
+    stepsRef.current = steps
+    counterStepsRef.current = counterSteps
   })
 
   useEffect(()=>{
@@ -83,8 +85,8 @@ const Player = (p) => {
     setPlaying(false)
     cancelRef.current = true
     if(currStepRef.current > 0){
-      setDesc(stepsRef.current[currStepRef.current].desc)
-      p.animate(stepsRef.current[currStepRef.current--].animation)
+      setDesc(counterStepsRef.current[currStepRef.current].desc)
+      p.animate(counterStepsRef.current[currStepRef.current--].animation)
     }
   }
   

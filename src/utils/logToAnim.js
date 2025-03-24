@@ -4,35 +4,34 @@ const green = "#00ef00"
 const white = "#fff"
 
 export const bubbleLog = (log) => {
-  let seq = []
-  let counterSeq = []
+  let steps = []
+  let counterSteps = []
   for(let l of log){
-    if(l.type == "checkBars") animCheckBars(l, seq)
-    else if(l.type == "swapBars") animswapBars(l, seq)
-    else if(l.type == "codeHighlight") animCode(l, seq)
+    if(l.type == "checkBars") animCheckBars(l, steps, counterSteps)
+    else if(l.type == "swapBars") animswapBars(l, steps, counterSteps)
+    else if(l.type == "codeHighlight") animCode(l, steps, counterSteps)
   }
-  return seq
+  return {steps, counterSteps}
 }
 
-function animCode(l, seq){
-  const s = 
-  seq.push(
-    ...l.lines.map((v,i) => {
+function animCode(l, steps, counterSteps){
+  const s = l.lines.map((v,i) => {
     return {
-        animation: [
-          ...Array.from({length:13}).map((v,i) => [
-              `#c${i-1}`, {backgroundColor: white}, {duration: 0}
-          ]),
-          [`#c${v-1}`, {backgroundColor: green}]
+      animation: [
+        ...Array.from({length:13}).map((v,i) => [
+          `#c${i-1}`, {backgroundColor: white}, {duration: 0}
+        ]),
+        [`#c${v-1}`, {backgroundColor: green}]
       ],
       desc: l.desc
     };
-    })
-  )
+  })
+  steps.push(...s)
+  counterSteps.push(...s)
 }
 
-function animCheckBars (l, seq){
-  seq.push({
+function animCheckBars (l, steps, counterSteps){
+  const s = {
     animation:[
       [`#b${l.i_id}`, {y: "-2em"}],
       [`#b${l.j_id}`, {y: "-2em"},{at:"<"}],
@@ -40,13 +39,15 @@ function animCheckBars (l, seq){
       [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
     ],
     desc: "comparing bars..." 
-  })
+  }
+  steps.push(s)
+  counterSteps.push(s)
 }
-function animswapBars(l, seq){
+function animswapBars(l, steps, counterSteps){
   let b1 = document.getElementById(`b${l.i_id}`);
   let b2 = document.getElementById(`b${l.j_id}`);
 
-  seq.push({
+  steps.push({
     animation:[
       [b1,
         {
@@ -56,6 +57,25 @@ function animswapBars(l, seq){
       [b2,
         {
           x: `${2 * (l.j - l.j_id) - 2}em`,
+        },
+        {
+          at: "<"
+        },
+      ], 
+    ],
+    desc: "swapping bars..."
+  })
+
+  counterSteps.push({
+    animation:[
+      [b1,
+        {
+          x: `${2 * (l.i - l.i_id)}em`,
+        },
+      ],
+      [b2,
+        {
+          x: `${2 * (l.j - l.j_id)}em`,
         },
         {
           at: "<"

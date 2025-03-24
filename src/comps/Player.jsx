@@ -32,8 +32,14 @@ const Player = (p) => {
   const {setDesc} = useDesc()
 
   const cancelRef = useRef(false)
-  const currStepRef = useRef(0)
   const playingRef = useRef(false)
+
+  const currStepRef = useRef(0)
+  const [currStep, setCurrStep] = useState(0)
+
+  useEffect(()=>{
+    currStepRef.current = currStep
+  },[currStep])
 
   useEffect(()=>{
     playingRef.current = playing;
@@ -53,19 +59,20 @@ const Player = (p) => {
   useEffect(()=>{
 
     cancelRef.current = true
-    currStepRef.current = 0
+    setCurrStep(0)
     if (control) control.stop()
   },[p.size, p.vals])
 
   const onPlay = async() => {
-    console.log(currStepRef.current)
     cancelRef.current = false
     playingRef.current = !playingRef.current
     setPlaying(p=>!p)
-    while(currStepRef.current<stepsRef.current.length-1){
+    while(currStepRef.current<stepsRef.current.length){
       if(cancelRef.current || !playingRef.current) break;
       setDesc(stepsRef.current[currStepRef.current].desc)
-      const ctrl = p.animate(stepsRef.current[currStepRef.current++].animation)
+      const ctrl = p.animate(stepsRef.current[currStepRef.current].animation)
+      if (currStepRef.current<stepsRef.current.length-1)
+        setCurrStep(p=>p+1)
       ctrl.speed = speedRef.current
       setControl(ctrl)
       await ctrl
@@ -77,21 +84,24 @@ const Player = (p) => {
     cancelRef.current = true
     if(currStepRef.current < stepsRef.current.length){
       setDesc(stepsRef.current[currStepRef.current].desc)
-      p.animate(stepsRef.current[currStepRef.current++].animation)
+      p.animate(stepsRef.current[currStepRef.current].animation)
+      if (currStepRef.current<stepsRef.current.length-1)
+        setCurrStep(p=>p+1)
     }
   }
 
   const onPrev = () => {
     setPlaying(false)
     cancelRef.current = true
-    if(currStepRef.current > 0){
+    if(currStepRef.current >= 0){
       setDesc(counterStepsRef.current[currStepRef.current].desc)
-      p.animate(counterStepsRef.current[currStepRef.current--].animation)
+      p.animate(counterStepsRef.current[currStepRef.current].animation)
+      if (currStepRef.current>0)
+        setCurrStep(p=>p-1)
     }
   }
   
   const onSpeedSelect = (e) => {
-    console.log(e.target.value)
     setSpeed(e.target.value)
   }
 
@@ -102,21 +112,22 @@ const Player = (p) => {
     p.setSize(e.target.value)
   }
 
-  const onRestart = async () => {
+  const onRestart =  () => {
     setPlaying(false)
     cancelRef.current = true
-    while(currStepRef.current>0){
+    while(currStepRef.current>=0){
       setDesc(counterStepsRef.current[currStepRef.current].desc)
-      const ctrl = p.animate(counterStepsRef.current[currStepRef.current--].animation)
-      ctrl.speed = 10
-      setControl(ctrl)
+      p.animate(counterStepsRef.current[currStepRef.current--].animation)
+      if (currStepRef.current>0)
+        setCurrStep(p=>p-1)
     }
+    setCurrStep(0)
   }
 
   return <div className="player">
     <div className="wrap">
       <Slider 
-        max={stepsRef.current.length}
+        max={stepsRef.current.length-1}
         value={currStepRef.current}
       />
       <div className="player_control">

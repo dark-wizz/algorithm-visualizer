@@ -25,6 +25,7 @@ const Player = (p) => {
   const [control, setControl] = useState(null)
   const stepsRef = useRef([])
   const counterStepsRef = useRef([])
+  const [stepsSize, setStepsSize] = useState(0)
 
   const [speed, setSpeed] = useState(1);
   const speedRef = useRef(1)
@@ -54,6 +55,7 @@ const Player = (p) => {
     const {steps, counterSteps} = bubbleLog(log, p.vals)
     stepsRef.current = steps
     counterStepsRef.current = counterSteps
+    setStepsSize(steps.length)
   })
 
   useEffect(()=>{
@@ -138,17 +140,16 @@ const Player = (p) => {
         p.animate(counterStepsRef.current[i].animation)
       }
     }
-
     setCurrStep(v)
   }
 
   return <div className="player">
     <div className="wrap">
       <Slider 
-        max={stepsRef.current.length-1}
+        max={stepsSize - 1}
         value={currStep}
         onChange={onSlide}
-      />
+      />{currStep}
       <div className="player_control">
       <FormControl sx={{ minWidth: "3em" }} size="small">
         <InputLabel id="player_speed_label">speed</InputLabel>

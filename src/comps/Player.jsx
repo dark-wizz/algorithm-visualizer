@@ -123,12 +123,31 @@ const Player = (p) => {
     }
     setCurrStep(0)
   }
+  const onSlide = (e) => {
+    let v = e.target.value
+    setPlaying(false)
+    cancelRef.current = true
+    console.log(v)
+    const isForward = currStep - v < 0
+    if(isForward){
+      for(let i=currStep; i<=v; i++){
+        p.animate(stepsRef.current[i].animation)
+      }
+    }else{
+      for(let i=currStep; i>=v; i--){
+        p.animate(counterStepsRef.current[i].animation)
+      }
+    }
+
+    setCurrStep(v)
+  }
 
   return <div className="player">
     <div className="wrap">
       <Slider 
         max={stepsRef.current.length-1}
-        value={currStepRef.current}
+        value={currStep}
+        onChange={onSlide}
       />
       <div className="player_control">
       <FormControl sx={{ minWidth: "3em" }} size="small">

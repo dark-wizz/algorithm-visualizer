@@ -62,7 +62,7 @@ const Player = (p) => {
     cancelRef.current = false
     playingRef.current = !playingRef.current
     setPlaying(p=>!p)
-    while(currStepRef.current<stepsRef.current.length){
+    while(currStepRef.current<stepsRef.current.length-1){
       if(cancelRef.current || !playingRef.current) break;
       setDesc(stepsRef.current[currStepRef.current].desc)
       const ctrl = p.animate(stepsRef.current[currStepRef.current++].animation)
@@ -102,8 +102,15 @@ const Player = (p) => {
     p.setSize(e.target.value)
   }
 
-  const onRestart = () => {
-    control.cancel()
+  const onRestart = async () => {
+    setPlaying(false)
+    cancelRef.current = true
+    while(currStepRef.current>0){
+      setDesc(counterStepsRef.current[currStepRef.current].desc)
+      const ctrl = p.animate(counterStepsRef.current[currStepRef.current--].animation)
+      ctrl.speed = 10
+      setControl(ctrl)
+    }
   }
 
   return <div className="player">

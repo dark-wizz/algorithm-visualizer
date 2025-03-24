@@ -1,3 +1,4 @@
+import { bubbleCode } from "./pseudocode"
 
 const red = "#ef0000"
 const green = "#00ef00"
@@ -18,8 +19,8 @@ function animCode(l, steps, counterSteps){
   const s = l.lines.map((v,i) => {
     return {
       animation: [
-        ...Array.from({length:13}).map((v,i) => [
-          `#c${i-1}`, {backgroundColor: white}, {duration: 0}
+        ...Array.from({length:bubbleCode.length}).map((v,i) => [
+          `#c${i}`, {backgroundColor: white}, {duration: 0}
         ]),
         [`#c${v-1}`, {backgroundColor: green}]
       ],

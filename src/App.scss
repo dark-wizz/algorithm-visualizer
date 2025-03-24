@@ -57,6 +57,14 @@ html, body, #root{
     place-items: center;
   }
 }
+.slider{
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+  place-items: center;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5em;
+}
 .player .MuiSlider-root{
   height: 4px;
   color:black;

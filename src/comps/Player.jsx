@@ -145,11 +145,15 @@ const Player = (p) => {
 
   return <div className="player">
     <div className="wrap">
-      <Slider 
-        max={stepsSize - 1}
-        value={currStep}
-        onChange={onSlide}
-      />{currStep}
+      <div className="slider">
+        {currStep}
+        <Slider 
+          max={stepsSize - 1}
+          value={currStep}
+          onChange={onSlide}
+        />
+        {stepsSize-1}
+      </div>
       <div className="player_control">
       <FormControl sx={{ minWidth: "3em" }} size="small">
         <InputLabel id="player_speed_label">speed</InputLabel>

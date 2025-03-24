@@ -5,6 +5,7 @@ const white = "#fff"
 
 export const bubbleLog = (log) => {
   let seq = []
+  let counterSeq = []
   for(let l of log){
     if(l.type == "checkBars") animCheckBars(l, seq)
     else if(l.type == "swapBars") animswapBars(l, seq)
@@ -14,6 +15,7 @@ export const bubbleLog = (log) => {
 }
 
 function animCode(l, seq){
+  const s = 
   seq.push(
     ...l.lines.map((v,i) => {
     return {

@@ -42,7 +42,6 @@ const Player = (p) => {
     speedRef.current=speed;
   },[speed])
 
-  const [started, setStarted] = useState(false)
   useEffect(()=>{
     const log = bubbleSort([...p.vals])
     const seq = bubbleLog(log, p.vals)
@@ -54,10 +53,10 @@ const Player = (p) => {
     cancelRef.current = true
     currStepRef.current = 0
     if (control) control.stop()
-    setStarted(false)
   },[p.size, p.vals])
 
   const onPlay = async() => {
+    console.log(currStepRef.current)
     cancelRef.current = false
     playingRef.current = !playingRef.current
     setPlaying(p=>!p)
@@ -74,12 +73,21 @@ const Player = (p) => {
   const onNext = () => {
     setPlaying(false)
     cancelRef.current = true
-    setStarted(false)
-    if(currStepRef.current < stepsRef.current.length)
+    if(currStepRef.current < stepsRef.current.length){
       setDesc(stepsRef.current[currStepRef.current].desc)
       p.animate(stepsRef.current[currStepRef.current++].animation)
+    }
   }
 
+  const onPrev = () => {
+    setPlaying(false)
+    cancelRef.current = true
+    if(currStepRef.current > 0){
+      setDesc(stepsRef.current[currStepRef.current].desc)
+      p.animate(stepsRef.current[currStepRef.current--].animation)
+    }
+  }
+  
   const onSpeedSelect = (e) => {
     console.log(e.target.value)
     setSpeed(e.target.value)
@@ -125,7 +133,7 @@ const Player = (p) => {
         <div className="restart" onClick={onRestart}>
           <RestartAltOutlinedIcon /> 
         </div>
-        <div className="prev">
+        <div className="prev" onClick={onPrev}>
           <SkipPreviousOutlinedIcon />
         </div>
         <div className="play" onClick={onPlay}>

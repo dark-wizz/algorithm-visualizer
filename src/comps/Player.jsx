@@ -40,15 +40,9 @@ const Player = (p) => {
 
   useEffect(()=>{
     currStepRef.current = currStep
-  },[currStep])
-
-  useEffect(()=>{
     playingRef.current = playing;
-  },[playing])
-
-  useEffect(()=>{
     speedRef.current=speed;
-  },[speed])
+  },[currStep,playing,speed])
 
   useEffect(()=>{
     const log = bubbleSort([...p.vals])
@@ -59,7 +53,6 @@ const Player = (p) => {
   })
 
   useEffect(()=>{
-
     cancelRef.current = true
     setCurrStep(0)
   },[p.size, p.vals])

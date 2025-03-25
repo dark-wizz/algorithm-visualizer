@@ -33,10 +33,10 @@ const Player = (p) => {
   const [speed, setSpeed] = useState(1);
   const speedRef = useRef(1)
 
-  const cancelRef = useRef(false)
-
   const [currStep, setCurrStep] = useState(0)
   const currStepRef = useRef(0)
+
+  const controlRef = useRef(null)
 
   useEffect(()=>{
     currStepRef.current = currStep
@@ -52,57 +52,46 @@ const Player = (p) => {
     setStepsSize(steps.length)
   })
 
-  useEffect(()=>{
-    cancelRef.current = true
-    setCurrStep(0)
-  },[p.size, p.vals])
-
   const play = (dir) => {
+    console.log("enter")
+    if(!playingRef.current) return
+    setDesc(stepsRef.current[currStepRef.current].desc)
+    stepsRef.current[currStepRef.current].script?.()
     if(dir=="forwd"){
-
-    }if(dir=="backwd"){
-
+      const ctrl = p.animate(stepsRef.current[currStepRef.current].animation)
+      if (currStepRef.current>=stepsSize-1){
+        setPlaying(false); return
+      }
+      setCurrStep(p=>p+1)
+      ctrl.speed = speedRef.current
+      controlRef.current=ctrl
+    }else if(dir=="backwd"){
+      p.animate(counterStepsRef.current[currStepRef.current].animation)
+      if (currStepRef.current<=0){
+        setPlaying(false); return
+      }
+      setCurrStep(p=>p-1); 
     }
   }
 
   const onPlay = async() => {
-    cancelRef.current = false
     playingRef.current = !playingRef.current
     setPlaying(p=>!p)
-    while(currStepRef.current<stepsRef.current.length){
-      if(cancelRef.current || !playingRef.current) break;
-      setDesc(stepsRef.current[currStepRef.current].desc)
-      stepsRef.current[currStepRef.current].script?.()
-      const ctrl = p.animate(stepsRef.current[currStepRef.current].animation)
-      if (currStepRef.current<stepsRef.current.length-1)
-        setCurrStep(p=>p+1)
-      ctrl.speed = speedRef.current
-      await ctrl
+    while(currStepRef.current<=stepsSize-1){
+      if(!playingRef.current) break;
+      play("forwd")
+      await controlRef.current
     }
   }
 
   const onNext = () => {
-    setPlaying(false)
-    cancelRef.current = true
-    if(currStepRef.current < stepsRef.current.length){
-      setDesc(stepsRef.current[currStepRef.current].desc)
-      stepsRef.current[currStepRef.current].script?.()
-      p.animate(stepsRef.current[currStepRef.current].animation)
-      if (currStepRef.current<stepsRef.current.length-1)
-        setCurrStep(p=>p+1)
-    }
+    setPlaying(true)
+    play("forwd")
   }
 
   const onPrev = () => {
-    setPlaying(false)
-    cancelRef.current = true
-    if(currStepRef.current >= 0){
-      setDesc(counterStepsRef.current[currStepRef.current].desc)
-      stepsRef.current[currStepRef.current].script?.()
-      p.animate(counterStepsRef.current[currStepRef.current].animation)
-      if (currStepRef.current>0)
-        setCurrStep(p=>p-1)
-    }
+    setPlaying(true)
+    play("backwd")
   }
   
   const onSpeedSelect = (e) => {
@@ -118,36 +107,30 @@ const Player = (p) => {
 
   const onRestart =  () => {
     setPlaying(false)
-    cancelRef.current = true
     while(currStepRef.current>=0){
       setDesc(counterStepsRef.current[currStepRef.current].desc)
-      stepsRef.current[currStepRef.current].script?.()
       p.animate(counterStepsRef.current[currStepRef.current--].animation)
       if (currStepRef.current>0)
         setCurrStep(p=>p-1)
     }
     setCurrStep(0)
   }
+
   const onSlide = (e) => {
     let v = e.target.value
     setPlaying(false)
-    cancelRef.current = true
-    console.log(v)
     const isForward = currStep - v < 0
     if(isForward){
       for(let i=currStep; i<=v; i++){
-        stepsRef.current[currStepRef.current].script?.()
         p.animate(stepsRef.current[i].animation)
       }
     }else{
       for(let i=currStep; i>=v; i--){
-        stepsRef.current[currStepRef.current].script?.()
         p.animate(counterStepsRef.current[i].animation)
       }
     }
     setCurrStep(v)
   }
-
   return <div className="player">
     <div className="wrap">
       <div className="slider">

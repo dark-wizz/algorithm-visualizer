@@ -21,8 +21,11 @@ import { useDesc } from './contexts/DescProvider';
 
 const Player = (p) => {
 
+  const {setDesc} = useDesc()
+
   const [playing, setPlaying] = useState(false)
-  const [control, setControl] = useState(null)
+  const playingRef = useRef(false)
+
   const stepsRef = useRef([])
   const counterStepsRef = useRef([])
   const [stepsSize, setStepsSize] = useState(0)
@@ -30,13 +33,10 @@ const Player = (p) => {
   const [speed, setSpeed] = useState(1);
   const speedRef = useRef(1)
 
-  const {setDesc} = useDesc()
-
   const cancelRef = useRef(false)
-  const playingRef = useRef(false)
 
-  const currStepRef = useRef(0)
   const [currStep, setCurrStep] = useState(0)
+  const currStepRef = useRef(0)
 
   useEffect(()=>{
     currStepRef.current = currStep
@@ -62,8 +62,15 @@ const Player = (p) => {
 
     cancelRef.current = true
     setCurrStep(0)
-    if (control) control.stop()
   },[p.size, p.vals])
+
+  const play = (dir) => {
+    if(dir=="forwd"){
+
+    }if(dir=="backwd"){
+
+    }
+  }
 
   const onPlay = async() => {
     cancelRef.current = false
@@ -72,11 +79,11 @@ const Player = (p) => {
     while(currStepRef.current<stepsRef.current.length){
       if(cancelRef.current || !playingRef.current) break;
       setDesc(stepsRef.current[currStepRef.current].desc)
+      stepsRef.current[currStepRef.current].script?.()
       const ctrl = p.animate(stepsRef.current[currStepRef.current].animation)
       if (currStepRef.current<stepsRef.current.length-1)
         setCurrStep(p=>p+1)
       ctrl.speed = speedRef.current
-      setControl(ctrl)
       await ctrl
     }
   }
@@ -86,6 +93,7 @@ const Player = (p) => {
     cancelRef.current = true
     if(currStepRef.current < stepsRef.current.length){
       setDesc(stepsRef.current[currStepRef.current].desc)
+      stepsRef.current[currStepRef.current].script?.()
       p.animate(stepsRef.current[currStepRef.current].animation)
       if (currStepRef.current<stepsRef.current.length-1)
         setCurrStep(p=>p+1)
@@ -97,6 +105,7 @@ const Player = (p) => {
     cancelRef.current = true
     if(currStepRef.current >= 0){
       setDesc(counterStepsRef.current[currStepRef.current].desc)
+      stepsRef.current[currStepRef.current].script?.()
       p.animate(counterStepsRef.current[currStepRef.current].animation)
       if (currStepRef.current>0)
         setCurrStep(p=>p-1)
@@ -119,6 +128,7 @@ const Player = (p) => {
     cancelRef.current = true
     while(currStepRef.current>=0){
       setDesc(counterStepsRef.current[currStepRef.current].desc)
+      stepsRef.current[currStepRef.current].script?.()
       p.animate(counterStepsRef.current[currStepRef.current--].animation)
       if (currStepRef.current>0)
         setCurrStep(p=>p-1)
@@ -133,10 +143,12 @@ const Player = (p) => {
     const isForward = currStep - v < 0
     if(isForward){
       for(let i=currStep; i<=v; i++){
+        stepsRef.current[currStepRef.current].script?.()
         p.animate(stepsRef.current[i].animation)
       }
     }else{
       for(let i=currStep; i>=v; i--){
+        stepsRef.current[currStepRef.current].script?.()
         p.animate(counterStepsRef.current[i].animation)
       }
     }

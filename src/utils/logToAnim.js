@@ -24,7 +24,10 @@ function animCode(l, steps, counterSteps){
         ]),
         [`#c${v-1}`, {backgroundColor: green}]
       ],
-      desc: l.desc
+      desc: l.desc,
+      script: ()=>
+        document.getElementById(`c${v-1}`)
+          .scrollIntoView({block:"center", behavior:"smooth"})
     };
   })
   steps.push(...s)

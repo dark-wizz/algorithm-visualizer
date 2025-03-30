@@ -1,6 +1,12 @@
+import { MenuItem } from '@mui/material';
+import Select from '@mui/material/Select';
+
 const Header = () => {
   return <div className="header">
-    <h2>Bubble Sort</h2>
+    <Select value="bubbleSort">
+      <MenuItem value="bubbleSort">Bubble Sort</MenuItem>
+      <MenuItem value="selectionSort">Selection Sort</MenuItem>
+    </Select>
   </div>
 }
 

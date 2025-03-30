@@ -122,10 +122,12 @@ const Player = (p) => {
     const isForward = currStep - v < 0
     if(isForward){
       for(let i=currStep; i<=v; i++){
+        setDesc(counterStepsRef.current[currStepRef.current].desc)
         p.animate(stepsRef.current[i].animation)
       }
     }else{
       for(let i=currStep; i>=v; i--){
+        setDesc(counterStepsRef.current[currStepRef.current].desc)
         p.animate(counterStepsRef.current[i].animation)
       }
     }

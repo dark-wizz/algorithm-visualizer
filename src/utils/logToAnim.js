@@ -3,6 +3,8 @@ import { bubbleCode } from "./pseudocode"
 const red = "#ef0000"
 const green = "#00ef00"
 const white = "#fff"
+const gray = "#808080"
+const teal = "#008080"
 
 export const bubbleLog = (log) => {
   let steps = []
@@ -37,10 +39,35 @@ function animCode(l, steps, counterSteps){
 function animCheckBars (l, steps, counterSteps){
   const s = {
     animation:[
-      [`#b${l.i_id}`, {y: "-2em"}],
-      [`#b${l.j_id}`, {y: "-2em"},{at:"<"}],
-      [`#b${l.i_id}`, {y: "0em"}],
-      [`#b${l.j_id}`, {y: "0em"},{at:"<"}],
+      [`#b${l.i_id}`, {
+        y: "-2em", 
+        backgroundColor: teal
+      }
+      ],
+      [`#b${l.j_id}`, 
+        {
+        y: "-2em",
+        backgroundColor: teal
+        },
+        {
+          at:"<"
+        }
+      ],
+      [`#b${l.i_id}`, 
+        {
+          y: "0em",
+          backgroundColor: [teal,gray]
+        }
+      ],
+      [`#b${l.j_id}`, 
+        {
+          y: "0em",
+          backgroundColor: [teal,gray]
+        },
+        {
+          at:"<"
+        }
+      ],
     ],
     desc: "comparing bars..." 
   }
@@ -56,16 +83,20 @@ function animswapBars(l, steps, counterSteps){
       [b1,
         {
           x: `${2 * (l.i - l.i_id) + 2}em`,
-        },
+          backgroundColor: green
+        }
       ],
       [b2,
         {
           x: `${2 * (l.j - l.j_id) - 2}em`,
+          backgroundColor: green
         },
         {
-          at: "<"
+          at: "<",
         },
       ], 
+      [b1, {backgroundColor: gray},{times: 1}],
+      [b2, {backgroundColor: gray},{times: 1}]
     ],
     desc: "swapping bars..."
   })

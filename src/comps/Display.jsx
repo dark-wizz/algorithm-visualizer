@@ -16,10 +16,6 @@ const Display = () => {
   const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
 
-
-  useEffect(()=>{
-    console.log("rendered")
-  })
   useEffect(()=>{
     setVals(genRandomArr(2, 20, size))
   },[size])

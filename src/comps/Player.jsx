@@ -16,12 +16,12 @@ import { bubbleLog } from '../utils/logToAnim';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
-import { useDesc } from './contexts/DescProvider';
+import { useApp } from './contexts/AppProvider';
 
 
 const Player = (p) => {
 
-  const {setDesc} = useDesc()
+  const {setDesc} = useApp()
 
   const [playing, setPlaying] = useState(false)
   const playingRef = useRef(false)

@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
 import { useAnimate } from "motion/react";
-import DescProvider from "./contexts/DescProvider";
 
 const Display = () => {
   
@@ -35,7 +34,6 @@ const Display = () => {
     </div>
     
     <Code />
-    <DescProvider>
       <Player
         animate={animate} size={size}
         setSize={setSize} vals={vals}
@@ -43,8 +41,6 @@ const Display = () => {
       />
       <About 
       />
-    </DescProvider>
-
   </div>
 }
 

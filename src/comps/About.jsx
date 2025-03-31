@@ -1,7 +1,7 @@
-import { useDesc } from "./contexts/DescProvider";
+import { useApp } from "./contexts/AppProvider";
 
-const About = (p) => {
-  const {desc} = useDesc()
+const About = () => {
+  const {desc} = useApp()
   return <div className="about">
     <div className="wrap">
       <h4 className="title" style={{marginBottom:"0.7em"}}>BubbleSort</h4>

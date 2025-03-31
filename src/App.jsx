@@ -1,15 +1,16 @@
 import "./App.scss"
 import Header from "./comps/Header";
 import Body from "./comps/Body";
-import { useState } from "react";
+import AppProvider from "./comps/contexts/AppProvider"
 
 const App = () => {
-  const [selectedAlgo,setSelectedAlgo] = useState("bubbleSort")
 
   return <div className="app">
-      <Header selectedAlgo={selectedAlgo} setSelectedAlgo={setSelectedAlgo}/>
+    <AppProvider> 
+      <Header/>
       <Body />
-    </div>
+    </AppProvider> 
+  </div>
 }
 
 export default App;

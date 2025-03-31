@@ -1,10 +1,12 @@
 import { MenuItem } from '@mui/material';
 import Select from '@mui/material/Select';
+import { useApp } from './contexts/AppProvider';
 
-const Header = (p) => {
+const Header = () => {
+  const {selectedAlgo, setSelectedAlgo} = useApp()
   return <div className="header">
-    <Select value={p.selectedAlgo} 
-      onChange={(e)=>p.setSelectedAlgo(e.target.value)}>
+    <Select value={selectedAlgo} 
+      onChange={(e)=>setSelectedAlgo(e.target.value)}>
       <MenuItem value="bubbleSort"> Bubble Sort </MenuItem>
       <MenuItem value="selectionSort">Selection Sort</MenuItem>
     </Select>

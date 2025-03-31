@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 const Bars = (p) => {
-  return <div className="bars">
+  return(
     <motion.div className="bar"
       id={`b${p.id}`}
       layout
@@ -8,10 +8,27 @@ const Bars = (p) => {
           border: "1px solid black",
           backgroundColor: "gray",
           width: "1em",
-          height: `${p.val}em`,
+          textAlign: "center",
       }}
-    ></motion.div>
-  </div>
+    >
+      <div style={{fontSize: "0.8em"}}>
+        {p.val}
+      </div>
+
+      <div
+        style={{
+          fontSize: "1rem",
+          height: `${p.val}em`,
+        }}
+      >
+      </div>
+
+      <div style={{fontSize: "0.8em"}}>
+        {p.id}
+      </div>
+        
+    </motion.div>
+  )
 }
 
 export default Bars;

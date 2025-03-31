@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
 import { useAnimate } from "motion/react";
-import { useRef } from "react";
 import DescProvider from "./contexts/DescProvider";
 
 const Display = () => {

@@ -82,13 +82,13 @@ function animswapBars(l, steps, counterSteps){
     animation:[
       [b1,
         {
-          x: `${2 * (l.i - l.i_id) + 2}em`,
+          x: `${2 * (l.i - l.i_id) + (l.i-l.j)*-2}em`,
           backgroundColor: green
         }
       ],
       [b2,
         {
-          x: `${2 * (l.j - l.j_id) - 2}em`,
+          x: `${2 * (l.j - l.j_id) + (l.i-l.j)*2}em`,
           backgroundColor: green
         },
         {
@@ -106,16 +106,20 @@ function animswapBars(l, steps, counterSteps){
       [b1,
         {
           x: `${2 * (l.i - l.i_id)}em`,
+          backgroundColor: green
         },
       ],
       [b2,
         {
           x: `${2 * (l.j - l.j_id)}em`,
+          backgroundColor: green
         },
         {
           at: "<"
         },
       ], 
+      [b1, {backgroundColor: gray},{times: 1}],
+      [b2, {backgroundColor: gray},{times: 1}]
     ],
     desc: "swapping bars..."
   })

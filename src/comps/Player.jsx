@@ -12,16 +12,17 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { genRandomArr } from '../utils/funcs';
 import bubbleSort from '../utils/algos/bubbleSort';
-import { bubbleLog } from '../utils/logToAnim';
+import { animateLog } from '../utils/logToAnim';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useApp } from './contexts/AppProvider';
+import selectionSort from '../utils/algos/selectionSort';
 
 
 const Player = (p) => {
 
-  const {setDesc} = useApp()
+  const {selectedAlgo, setDesc} = useApp()
 
   const [playing, setPlaying] = useState(false)
   const playingRef = useRef(false)
@@ -45,8 +46,16 @@ const Player = (p) => {
   },[currStep,playing,speed])
 
   useEffect(()=>{
-    const log = bubbleSort([...p.vals])
-    const {steps, counterSteps} = bubbleLog(log, p.vals)
+    let log;
+    switch(selectedAlgo){
+      case "bubbleSort":
+        log = bubbleSort([...p.vals])
+        break
+      case "selectionSort":
+        log = selectionSort([...p.vals])
+        break
+    }
+    const {steps, counterSteps} = animateLog(log, p.vals.length)
     stepsRef.current = steps
     counterStepsRef.current = counterSteps
     setStepsSize(steps.length)
@@ -99,7 +108,7 @@ const Player = (p) => {
   }
 
   const onGen = () => {
-    p.setVals(genRandomArr(2,20,p.size))
+    p.setVals(genRandomArr(2,15,p.size))
   }
   const onSizeChange = (e) => {
     p.setSize(e.target.value)

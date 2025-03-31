@@ -6,7 +6,7 @@ const white = "#fff"
 const gray = "#808080"
 const teal = "#008080"
 
-export const bubbleLog = (log) => {
+export const animateLog = (log) => {
   let steps = []
   let counterSteps = []
   for(let l of log){
@@ -16,6 +16,7 @@ export const bubbleLog = (log) => {
   }
   return {steps, counterSteps}
 }
+
 
 function animCode(l, steps, counterSteps){
   const s = l.lines.map((v,i) => {

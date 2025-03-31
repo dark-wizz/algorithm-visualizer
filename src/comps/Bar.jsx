@@ -3,7 +3,6 @@ const Bars = (p) => {
   return(
     <motion.div className="bar"
       id={`b${p.id}`}
-      layout
       style={{
           border: "1px solid black",
           backgroundColor: "gray",

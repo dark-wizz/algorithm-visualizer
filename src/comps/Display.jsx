@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
 import { useAnimate } from "motion/react";
+import { useApp } from "./contexts/AppProvider";
 
 const Display = () => {
   
@@ -13,10 +14,11 @@ const Display = () => {
   const [size, setSize] = useState(10)
   const [rkey, setRkey] = useState(0);
   const [scope, animate] = useAnimate()
+  const {selectedAlgo} = useApp()
 
   useEffect(()=>{
-    setVals(genRandomArr(2, 20, size))
-  },[size])
+    setVals(genRandomArr(2, 15, size))
+  },[size, selectedAlgo])
 
   useEffect(()=>{
     setRkey(p=>p+1)

@@ -1,16 +1,22 @@
-*{
+* {
   box-sizing: border-box;
 }
-html, body, #root{
+
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #010812; //background color 
 }
+
 .body {
   display: grid;
   grid-template-rows: 1fr;
   height: 100%;
 }
+
 .app {
   height: 100%;
   display: grid;
@@ -18,7 +24,8 @@ html, body, #root{
   padding: 0.5em;
   gap: 1em;
 }
-.display{
+
+.display {
   max-height: 100%;
   gap: 1em;
   display: grid;
@@ -26,7 +33,8 @@ html, body, #root{
   grid-template-rows: 5fr 2fr;
 }
 
-.display>*, .header{
+.display>*,
+.header {
   border: 1px solid gray;
   border-radius: 10px;
   display: grid;
@@ -34,15 +42,16 @@ html, body, #root{
   padding: 0.5em;
 
   //oveflow fix
-  height:0;
-  min-height:100%;
+  height: 0;
+  min-height: 100%;
   overflow: scroll;
 }
-.header{
+
+.header {
   padding: 1em;
 }
 
-.control{
+.control {
   grid-template-rows: 1fr auto;
   height: 100%;
   place-items: center;
@@ -57,7 +66,8 @@ html, body, #root{
     place-items: center;
   }
 }
-.slider{
+
+.slider {
   display: grid;
   grid-auto-flow: column;
   width: 100%;
@@ -65,38 +75,46 @@ html, body, #root{
   grid-template-columns: auto 1fr auto;
   gap: 0.5em;
 }
-.player .MuiSlider-root{
+
+.player .MuiSlider-root {
   height: 4px;
-  color:black;
-  .MuiSlider-thumb{
+  color: black;
+
+  .MuiSlider-thumb {
     height: 8px;
     width: 8px;
     color: black;
 
-    &:hover, &.Mui-focusVisible{
+    &:hover,
+    &.Mui-focusVisible {
       box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
     }
   }
-  .Mui-active{
+
+  .Mui-active {
     height: 18px;
     width: 18px;
   }
 }
 
-.player .player_control{
+.player .player_control {
   display: flex;
-  gap:1em;
-  .buttons{
-    border: 1px solid gray;
+  align-items: center;
+  gap: 1em;
+
+  .buttons {
+    border: 2px solid #23eded; //for theme
+    color: #23eded; //for theme
     border-radius: 10px;
     padding: 0.5em 1em;
     display: grid;
     grid-auto-flow: column;
     place-items: center;
     gap: 1em;
-    >*:hover{
-      background-color: gray;
-      cursor: pointer;  
+
+    >*:hover {
+      filter: drop-shadow(0 0 3px #23eded); //for theme
+      cursor: pointer;
     }
   }
 }
@@ -105,18 +123,48 @@ html, body, #root{
   display: none;
 }
 
-.code{
-  >*{
+.code {
+  >* {
     overflow: scroll;
   }
 }
 
-.about{
+//for index number difference
+#index-nums {
+  color: #576c7c;
+}
+
+.about {
   place-content: stretch;
-  .wrap{
+
+  .wrap {
     padding: 1em;
-     *{
+
+    * {
       margin: 0;
     }
   }
+}
+
+//for texts 
+.wrap {
+  color: #dfe0e2;
+}
+
+//for Desc text masking 
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-image: linear-gradient(#23eded, #ffffff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+//for bar's appearance
+.bar {
+  border: 2px solid #23eded;
+  background: linear-gradient(to bottom, #00f0ff90 50%, #001f3f 90%);
+  border-radius: 3px;
+  color: white;
+  text-shadow: 0 0 5px #000000;
 }

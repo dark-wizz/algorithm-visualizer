@@ -49,6 +49,28 @@ body,
 
 .header {
   padding: 1em;
+
+  // header text color 
+  .MuiSelect-select {
+    color: #23eded;
+    text-shadow: 0 0 5px #23eded;
+    font-weight: bold;
+  }
+
+  // header svg color 
+  .MuiSvgIcon-root {
+    color: #23EDED;
+    filter: drop-shadow(0 0 5px #23EDED);
+  }
+
+}
+
+//header and speed select menu color
+.custom-select-menu {
+  background-color: #000912 !important;
+  color: #23eded !important;
+  box-shadow: 0 0 5px #23eded !important;
+  border: 1px solid #23eded !important;
 }
 
 .control {
@@ -78,17 +100,25 @@ body,
 
 .player .MuiSlider-root {
   height: 4px;
-  color: black;
+  color: #23eded; // track color
 
   .MuiSlider-thumb {
-    height: 8px;
-    width: 8px;
-    color: black;
+    height: 10px;
+    width: 10px;
+    color: #23eded; //thumb color
 
-    &:hover,
     &.Mui-focusVisible {
       box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
     }
+
+    &:hover {
+      box-shadow: 0 0 8px #23eded; //for glow effect
+    }
+  }
+
+  //rail color
+  .MuiSlider-rail {
+    color: #02143E
   }
 
   .Mui-active {
@@ -117,6 +147,46 @@ body,
       cursor: pointer;
     }
   }
+}
+
+
+.player_control {
+
+  //speed control color 
+  .MuiInputLabel-root {
+    color: #23eded;
+    text-shadow: 0 0 5px #23eded;
+  }
+
+  .MuiOutlinedInput-root {
+    color: #23eded;
+    font-weight: bold;
+    text-shadow: 0 0 5px #23eded;
+
+    .MuiSvgIcon-root {
+      color: #23eded;
+      filter: drop-shadow(0 0 5px #23eded);
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      border: 2px solid #23eded;
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border: 2px solid #23eded;
+      box-shadow: 0 0 5px #23eded;
+    }
+  }
+
+  //size input color
+  .MuiInput-root {
+    color: #23eded;
+  }
+
+  .MuiInputBase-input {
+    border-bottom: 2px solid #23eded;
+  }
+
 }
 
 ::-webkit-scrollbar {

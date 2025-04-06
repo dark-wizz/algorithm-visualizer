@@ -7,26 +7,9 @@ const Header = () => {
   return (
     <div className="header">
       <Select
-        sx={{
-          color: "#23EDED",
-          textShadow: "0 0 5px #23EDED",
-          fontWeight: "bold",
-          ".MuiSvgIcon-root": {
-            color: "#23EDED",
-            filter: "drop-shadow(0 0 5px #23EDED)",
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "transparent",
-          },
-        }}
         MenuProps={{
           PaperProps: {
-            sx: {
-              backgroundColor: "#000912",
-              color: "#23EDED",
-              boxShadow: "0 0 5px #23EDED",
-              border: "1px solid #23EDED",
-            },
+            className: "custom-select-menu",
           },
         }}
         value={selectedAlgo}

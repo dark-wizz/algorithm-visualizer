@@ -146,70 +146,16 @@ const Player = (p) => {
       <div className="wrap">
         <div className="slider">
           {currStep}
-          <Slider
-            sx={{
-              "& .MuiSlider-thumb": {
-                width: 30,
-                height: 30,
-                backgroundColor: "#23eded",
-                "&:hover, &.Mui-focusVisible, &.Mui-active": {
-                  boxShadow: "0 0 20px #23eded",
-                },
-              },
-              "& .MuiSlider-track": {
-                backgroundColor: "#23eded",
-                height: ".4rem",
-              },
-              "& .MuiSlider-rail": {
-                backgroundColor: "#02143E",
-                height: ".4rem",
-              },
-            }}
-            max={stepsSize - 1}
-            value={currStep}
-            onChange={onSlide}
-          />
+          <Slider max={stepsSize - 1} value={currStep} onChange={onSlide} />
           {stepsSize - 1}
         </div>
         <div className="player_control">
           <FormControl sx={{ minWidth: "3em" }} size="small">
-            <InputLabel
-              id="player_speed_label"
-              sx={{
-                color: "#23EDED",
-                textShadow: "0 0 5px #23EDED",
-              }}
-            >
-              speed
-            </InputLabel>
+            <InputLabel id="player_speed_label">speed</InputLabel>
             <Select
-              sx={{
-                color: "#23EDED",
-                fontWeight: "bold",
-                textShadow: "0 0 5px #23EDED",
-                ".MuiSvgIcon-root": {
-                  color: "#23EDED",
-                  filter: "drop-shadow(0 0 5px #23EDED)",
-                },
-                ".MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#23EDED",
-                  borderWidth: "2px",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#23EDED",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#23EDED",
-                },
-              }}
               MenuProps={{
                 PaperProps: {
-                  sx: {
-                    backgroundColor: "#010812",
-                    color: "#23EDED",
-                    boxShadow: "0 0 5px #23EDED",
-                    border: "2px solid #23EDED",
-                  },
+                  className: "custom-select-menu",
                 },
               }}
               labelId="player_speed_label"
@@ -246,26 +192,8 @@ const Player = (p) => {
             </div>
           </div>
           <FormControl sx={{ width: "5em" }} size="small">
-            <InputLabel
-              id="player_size_label"
-              sx={{
-                color: "#23EDED",
-                textShadow: "0 0 5px #23EDED",
-              }}
-            >
-              size
-            </InputLabel>
+            <InputLabel id="player_size_label">size</InputLabel>
             <Input
-              sx={{
-                color: "#23EDED",
-                textShadow: "0 0 5px #23EDED",
-                "&:before": {
-                  borderBottom: "2px solid #23EDED",
-                },
-                "&:hover:not(.Mui-disabled):before": {
-                  borderBottom: "2px solid #23EDED",
-                },
-              }}
               type="number"
               defaultValue={p.size}
               onChange={onSizeChange}

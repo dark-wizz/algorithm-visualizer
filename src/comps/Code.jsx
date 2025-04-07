@@ -19,8 +19,7 @@ const Code = () => {
         {currCode.map((v, i) => {
           return (
             <pre id={`c${i}`} key={i}>
-              <span id="index-nums">{i + 1}</span> {v}{" "}
-              {/* add span for different color */}
+              {i + 1} {v}
             </pre>
           );
         })}

@@ -204,13 +204,15 @@ body,
 
 .code {
   >* {
+    font-weight: bold;
+    font-size: 1.14em;
     overflow: scroll;
   }
-}
 
-//for index number difference
-#index-nums {
-  color: var(--indexCol);
+  pre {
+    margin: .4rem;
+    padding: .2rem
+  }
 }
 
 .about {

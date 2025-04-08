@@ -3,7 +3,7 @@ import { bubbleCode } from "./pseudocode";
 const red = "#ef0000";
 const green = "#3DF3F120";
 const white = "#010812";
-const gray = "#808080";
+const gray = "linear-gradient(#23eded, #ffffff)";
 const teal = "#008080";
 
 export const animateLog = (log) => {
@@ -53,14 +53,14 @@ function animCheckBars(l, steps, counterSteps) {
         `#b${l.i_id}`,
         {
           y: "-2em",
-          backgroundColor: teal,
+          boxShadow: "0 0 10px #23eded",
         },
       ],
       [
         `#b${l.j_id}`,
         {
           y: "-2em",
-          backgroundColor: teal,
+          boxShadow: "0 0 10px #23eded",
         },
         {
           at: "<",
@@ -70,21 +70,21 @@ function animCheckBars(l, steps, counterSteps) {
         `#b${l.i_id}`,
         {
           y: "0em",
-          backgroundColor: [teal, gray],
+          boxShadow: "none",
         },
       ],
       [
         `#b${l.j_id}`,
         {
           y: "0em",
-          backgroundColor: [teal, gray],
+          boxShadow: "none",
         },
         {
           at: "<",
         },
       ],
     ],
-    desc: "comparing bars...",
+    desc: "Comparing bars...",
   };
   steps.push(s);
   counterSteps.push(s);
@@ -99,23 +99,23 @@ function animswapBars(l, steps, counterSteps) {
         b1,
         {
           x: `${2 * (l.i - l.i_id) + (l.i - l.j) * -2}em`,
-          backgroundColor: green,
+          boxShadow: "0 0 10px #2AFF31",
         },
       ],
       [
         b2,
         {
           x: `${2 * (l.j - l.j_id) + (l.i - l.j) * 2}em`,
-          backgroundColor: green,
+          boxShadow: "0 0 10px #2AFF31",
         },
         {
           at: "<",
         },
       ],
-      [b1, { backgroundColor: gray }, { times: 1 }],
-      [b2, { backgroundColor: gray }, { times: 1 }],
+      [b1, { boxShadow: "none" }, { times: 1 }],
+      [b2, { boxShadow: "none" }, { times: 1 }],
     ],
-    desc: "swapping bars...",
+    desc: "Swapping bars...",
   });
 
   counterSteps.push({
@@ -124,22 +124,22 @@ function animswapBars(l, steps, counterSteps) {
         b1,
         {
           x: `${2 * (l.i - l.i_id)}em`,
-          backgroundColor: green,
+          boxShadow: "0 0 10px #2AFF31",
         },
       ],
       [
         b2,
         {
           x: `${2 * (l.j - l.j_id)}em`,
-          backgroundColor: green,
+          boxShadow: "0 0 10px #2AFF31",
         },
         {
           at: "<",
         },
       ],
-      [b1, { backgroundColor: gray }, { times: 1 }],
-      [b2, { backgroundColor: gray }, { times: 1 }],
+      [b1, { boxShadow: "none" }, { times: 1 }],
+      [b2, { boxShadow: "none" }, { times: 1 }],
     ],
-    desc: "swapping bars...",
+    desc: "Swapping bars...",
   });
 }

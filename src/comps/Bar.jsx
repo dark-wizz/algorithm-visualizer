@@ -9,7 +9,7 @@ const Bars = (p) => {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "0.8em" }}>{p.val}</div>
+      <div style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.val}</div>
 
       <div
         style={{
@@ -18,7 +18,7 @@ const Bars = (p) => {
         }}
       ></div>
 
-      <div style={{ fontSize: "0.8em" }}>{p.id}</div>
+      <div style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.id}</div>
     </motion.div>
   );
 };

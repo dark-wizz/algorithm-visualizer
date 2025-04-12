@@ -1,30 +1,43 @@
 import { bubbleCode } from "./pseudocode";
 import gsap from "gsap";
 
+const bgColor = "#010812"
+const activeColor = "#3DF3F120"
 
-
-export const animateLog = (log) => {
-  let steps = [];
-  let counterSteps = [];
-  const tl = gsap.timeline({paused:true});
+export const animateLog = (log, codeLen, p) => {
+  const tl = gsap.timeline({
+    onUpdate:()=>{
+      p.setTime(tl.time())
+      p.setTotalTime(tl.totalDuration())
+    },
+    onComplete: ()=>{
+      tl.pause()
+      p.setPlaying(false)
+    },
+    onReverseComplete: ()=>{
+      tl.pause()
+      p.setPlaying(false)
+    },
+    paused:true,
+  });
   for (let l of log) {
     if (l.type == "checkBars") animCheckBars(l, tl);
     else if (l.type == "swapBars") animSwapBars(l, tl);
-    else if (l.type == "codeHighlight") animCode(l, tl);
+    else if (l.type == "codeHighlight") animCode(l, tl, codeLen);
   }
   return tl;
 };
 
-function animCode(l, tl){
-  for(let i=0; i<bubbleCode.length; i++){
-    console.log(i)
-    tl.to(`#c${i-1}`,{
+function animCode(l, tl, codeLen){
+  for(let i=0; i<codeLen; i++){
+    tl.to(`#c${i}`,{
+      backgroundColor: bgColor,
       duration: 0,
     })
   }
 
   for(let line of l.lines){
-    tl.to(`#c${line-1}`,{backgroundColor: "pink"})
+    tl.to(`#c${line-1}`,{backgroundColor: activeColor})
   }
 }
 

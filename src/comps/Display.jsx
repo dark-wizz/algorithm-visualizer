@@ -13,9 +13,11 @@ const Display = () => {
   const [rkey, setRkey] = useState(0);
   const { selectedAlgo } = useApp();
 
-  useEffect(() => {
+  const genVal = () => {
     setVals(genRandomArr(2, 15, size));
-  }, [size, selectedAlgo]);
+  }
+
+  useEffect(genVal, [size, selectedAlgo]);
 
   useEffect(() => {
     setRkey((p) => p + 1);
@@ -39,6 +41,7 @@ const Display = () => {
       <Code />
       <Player
         size={size}
+        onGen={genVal}
         setSize={setSize}
         vals={vals}
         setVals={setVals}

@@ -1,145 +1,44 @@
 import { bubbleCode } from "./pseudocode";
+import gsap from "gsap";
 
-const red = "#ef0000";
-const green = "#3DF3F120";
-const white = "#010812";
-const gray = "linear-gradient(#23eded, #ffffff)";
-const teal = "#008080";
+
 
 export const animateLog = (log) => {
   let steps = [];
   let counterSteps = [];
+  const tl = gsap.timeline({paused:true});
   for (let l of log) {
-    if (l.type == "checkBars") animCheckBars(l, steps, counterSteps);
-    else if (l.type == "swapBars") animswapBars(l, steps, counterSteps);
-    else if (l.type == "codeHighlight") animCode(l, steps, counterSteps);
+    if (l.type == "checkBars") animCheckBars(l, tl);
+    else if (l.type == "swapBars") animSwapBars(l, tl);
+    else if (l.type == "codeHighlight") animCode(l, tl);
   }
-  return { steps, counterSteps };
+  return tl;
 };
 
-function animCode(l, steps, counterSteps) {
-  const s = l.lines.map((v, i) => {
-    return {
-      animation: [
-        ...Array.from({ length: bubbleCode.length }).map((v, i) => [
-          `#c${i} `,
-          { backgroundColor: white, color: "white" },
-          { duration: 0 },
-        ]),
-        [
-          `#c${v - 1}`,
-          {
-            backgroundColor: green,
-            color: "#23eded",
-            borderRadius: "3px",
-          },
-        ],
-      ],
-      desc: l.desc,
-      script: () =>
-        document
-          .getElementById(`c${v - 1}`)
-          .scrollIntoView({ block: "center", behavior: "smooth" }),
-    };
-  });
-  steps.push(...s);
-  counterSteps.push(...s);
+function animCode(l, tl){
+  for(let i=0; i<bubbleCode.length; i++){
+    console.log(i)
+    tl.to(`#c${i-1}`,{
+      duration: 0,
+    })
+  }
+
+  for(let line of l.lines){
+    tl.to(`#c${line-1}`,{backgroundColor: "pink"})
+  }
 }
 
-function animCheckBars(l, steps, counterSteps) {
-  const s = {
-    animation: [
-      [
-        `#b${l.i_id}`,
-        {
-          y: "-2em",
-          boxShadow: "0 0 10px #23eded",
-        },
-      ],
-      [
-        `#b${l.j_id}`,
-        {
-          y: "-2em",
-          boxShadow: "0 0 10px #23eded",
-        },
-        {
-          at: "<",
-        },
-      ],
-      [
-        `#b${l.i_id}`,
-        {
-          y: "0em",
-          boxShadow: "none",
-        },
-      ],
-      [
-        `#b${l.j_id}`,
-        {
-          y: "0em",
-          boxShadow: "none",
-        },
-        {
-          at: "<",
-        },
-      ],
-    ],
-    desc: "Comparing bars...",
-  };
-  steps.push(s);
-  counterSteps.push(s);
+function animSwapBars(l, tl){
+  let dist = l.j - l.i;
+  tl.to(`#b${l.i_id}`,{
+    x: `+=${dist*2}em`
+  })
+  tl.to(`#b${l.j_id}`,{
+    x: `+=${dist*-2}em`
+  }, "<")
 }
-function animswapBars(l, steps, counterSteps) {
-  let b1 = document.getElementById(`b${l.i_id}`);
-  let b2 = document.getElementById(`b${l.j_id}`);
 
-  steps.push({
-    animation: [
-      [
-        b1,
-        {
-          x: `${2 * (l.i - l.i_id) + (l.i - l.j) * -2}em`,
-          boxShadow: "0 0 10px #2AFF31",
-        },
-      ],
-      [
-        b2,
-        {
-          x: `${2 * (l.j - l.j_id) + (l.i - l.j) * 2}em`,
-          boxShadow: "0 0 10px #2AFF31",
-        },
-        {
-          at: "<",
-        },
-      ],
-      [b1, { boxShadow: "none" }, { times: 1 }],
-      [b2, { boxShadow: "none" }, { times: 1 }],
-    ],
-    desc: "Swapping bars...",
-  });
-
-  counterSteps.push({
-    animation: [
-      [
-        b1,
-        {
-          x: `${2 * (l.i - l.i_id)}em`,
-          boxShadow: "0 0 10px #2AFF31",
-        },
-      ],
-      [
-        b2,
-        {
-          x: `${2 * (l.j - l.j_id)}em`,
-          boxShadow: "0 0 10px #2AFF31",
-        },
-        {
-          at: "<",
-        },
-      ],
-      [b1, { boxShadow: "none" }, { times: 1 }],
-      [b2, { boxShadow: "none" }, { times: 1 }],
-    ],
-    desc: "Swapping bars...",
-  });
+function animCheckBars(l, tl){
+  tl.to(`#b${l.i_id}`,{keyframes: {y:[-20, 0]}})
+  tl.to(`#b${l.j_id}`,{keyframes: {y:[-20, 0]}}, "<")
 }

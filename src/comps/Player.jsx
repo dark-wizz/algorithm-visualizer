@@ -18,30 +18,15 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
+import gsap from "gsap";
+import {useGSAP} from "@gsap/react"
 
 const Player = (p) => {
   const { selectedAlgo, setDesc } = useApp();
 
   const [playing, setPlaying] = useState(false);
-  const playingRef = useRef(false);
 
-  const stepsRef = useRef([]);
-  const counterStepsRef = useRef([]);
-  const [stepsSize, setStepsSize] = useState(0);
-
-  const [speed, setSpeed] = useState(1);
-  const speedRef = useRef(1);
-
-  const [currStep, setCurrStep] = useState(0);
-  const currStepRef = useRef(0);
-
-  const controlRef = useRef(null);
-
-  useEffect(() => {
-    currStepRef.current = currStep;
-    playingRef.current = playing;
-    speedRef.current = speed;
-  }, [currStep, playing, speed]);
+  const control = useRef(null);
 
   useEffect(() => {
     let log;
@@ -53,14 +38,12 @@ const Player = (p) => {
         log = selectionSort([...p.vals]);
         break;
     }
-    const { steps, counterSteps } = animateLog(log, p.vals.length);
-    stepsRef.current = steps;
-    counterStepsRef.current = counterSteps;
-    setStepsSize(steps.length);
+    control.current = animateLog(log, p.vals.length);
   });
 
 
   const onPlay = () => {
+    control.current.play()
   };
 
   const onNext = () => {
@@ -70,13 +53,13 @@ const Player = (p) => {
   };
 
   const onSpeedSelect = (e) => {
-    setSpeed(e.target.value);
   };
 
   const onGen = () => {
   };
 
   const onRestart = () => {
+    control.current.reverse()
   };
 
   const onSlide = (e) => {
@@ -85,9 +68,9 @@ const Player = (p) => {
     <div className="player">
       <div className="wrap">
         <div className="slider">
-          {currStep}
-          <Slider max={stepsSize - 1} value={currStep} onChange={onSlide} />
-          {stepsSize - 1}
+          {0}
+          <Slider max={100} value={12} onChange={onSlide} />
+          {100}
         </div>
         <div className="player_control">
           <FormControl sx={{ minWidth: "3em" }} size="small">

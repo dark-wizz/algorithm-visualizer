@@ -19,9 +19,9 @@ const Display = () => {
 
   useEffect(genVal, [size, selectedAlgo]);
 
-  useEffect(() => {
-    setRkey((p) => p + 1);
-  }, [vals, size]);
+  // useEffect(() => {
+  //   setRkey((p) => p + 1);
+  // }, [vals, size]);
 
   return (
     <div className="display" key={rkey}>

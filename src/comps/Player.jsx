@@ -21,6 +21,7 @@ import selectionSort from "../utils/algos/selectionSort";
 import gsap from "gsap";
 import {useGSAP} from "@gsap/react"
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
+import { Box, Typography } from "@mui/material";
 
 const Player = (p) => {
   const { selectedAlgo, setDesc } = useApp();
@@ -147,15 +148,17 @@ const Player = (p) => {
             </div>
           </div>
           <FormControl sx={{ width: "5em" }} size="small">
-            <InputLabel id="player_size_label">size</InputLabel>
-            <Input
-              type="number"
-              id="sizeInp"
-              value={p.size}
-              onChange={(e)=>{
-                p.setSize(e.target.value)
-              }}
-            />
+            <Box className="sizeBox">
+              <Typography>Size</Typography>
+              <Slider
+                max={25}
+                min={1}
+                valueLabelDisplay="auto"
+                marks={[1,5,10,15,20,25].map(v=>{return {value:v}})}
+                value={p.size}
+                onChange={(e)=>p.setSize(e.target.value)} 
+              />
+            </Box>
           </FormControl>
         </div>
       </div>

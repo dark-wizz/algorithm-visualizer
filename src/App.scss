@@ -258,3 +258,9 @@ body,
 .desc {
   font-weight: bold;
 }
+.sizeBox{
+  display: grid;
+  align-items: center;
+  color: var(--mainCol);
+  text-shadow: 0 0 5px var(--mainCol);
+}

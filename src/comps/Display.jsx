@@ -5,14 +5,12 @@ import Player from "./Player";
 import { useState } from "react";
 import { useEffect } from "react";
 import { genRandomArr } from "../utils/funcs";
-import { useAnimate } from "motion/react";
 import { useApp } from "./contexts/AppProvider";
 
 const Display = () => {
   const [vals, setVals] = useState([]);
   const [size, setSize] = useState(10);
   const [rkey, setRkey] = useState(0);
-  const [scope, animate] = useAnimate();
   const { selectedAlgo } = useApp();
 
   useEffect(() => {
@@ -24,7 +22,7 @@ const Display = () => {
   }, [vals, size]);
 
   return (
-    <div className="display" key={rkey} ref={scope}>
+    <div className="display" key={rkey}>
       <div
         className="bars"
         style={{
@@ -40,7 +38,6 @@ const Display = () => {
 
       <Code />
       <Player
-        animate={animate}
         size={size}
         setSize={setSize}
         vals={vals}

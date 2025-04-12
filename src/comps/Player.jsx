@@ -59,48 +59,14 @@ const Player = (p) => {
     setStepsSize(steps.length);
   });
 
-  const play = (dir) => {
-    console.log("enter");
-    if (!playingRef.current) return;
-    setDesc(stepsRef.current[currStepRef.current].desc);
-    stepsRef.current[currStepRef.current].script?.();
-    if (dir == "forwd") {
-      const ctrl = p.animate(stepsRef.current[currStepRef.current].animation);
-      if (currStepRef.current >= stepsSize - 1) {
-        setPlaying(false);
-        return;
-      }
-      setCurrStep((p) => p + 1);
-      ctrl.speed = speedRef.current;
-      controlRef.current = ctrl;
-    } else if (dir == "backwd") {
-      p.animate(counterStepsRef.current[currStepRef.current].animation);
-      if (currStepRef.current <= 0) {
-        setPlaying(false);
-        return;
-      }
-      setCurrStep((p) => p - 1);
-    }
-  };
 
-  const onPlay = async () => {
-    playingRef.current = !playingRef.current;
-    setPlaying((p) => !p);
-    while (currStepRef.current <= stepsSize - 1) {
-      if (!playingRef.current) break;
-      play("forwd");
-      await controlRef.current;
-    }
+  const onPlay = () => {
   };
 
   const onNext = () => {
-    setPlaying(true);
-    play("forwd");
   };
 
   const onPrev = () => {
-    setPlaying(true);
-    play("backwd");
   };
 
   const onSpeedSelect = (e) => {
@@ -108,38 +74,12 @@ const Player = (p) => {
   };
 
   const onGen = () => {
-    p.setVals(genRandomArr(2, 15, p.size));
-  };
-  const onSizeChange = (e) => {
-    p.setSize(e.target.value);
   };
 
   const onRestart = () => {
-    setPlaying(false);
-    while (currStepRef.current >= 0) {
-      setDesc(counterStepsRef.current[currStepRef.current].desc);
-      p.animate(counterStepsRef.current[currStepRef.current--].animation);
-      if (currStepRef.current > 0) setCurrStep((p) => p - 1);
-    }
-    setCurrStep(0);
   };
 
   const onSlide = (e) => {
-    let v = e.target.value;
-    setPlaying(false);
-    const isForward = currStep - v < 0;
-    if (isForward) {
-      for (let i = currStep; i <= v; i++) {
-        setDesc(counterStepsRef.current[currStepRef.current].desc);
-        p.animate(stepsRef.current[i].animation);
-      }
-    } else {
-      for (let i = currStep; i >= v; i--) {
-        setDesc(counterStepsRef.current[currStepRef.current].desc);
-        p.animate(counterStepsRef.current[i].animation);
-      }
-    }
-    setCurrStep(v);
   };
   return (
     <div className="player">
@@ -196,7 +136,7 @@ const Player = (p) => {
             <Input
               type="number"
               defaultValue={p.size}
-              onChange={onSizeChange}
+              onChange={(e)=>p.setSize(e.target.value)}
             />
           </FormControl>
         </div>

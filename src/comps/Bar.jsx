@@ -1,7 +1,6 @@
-import { motion } from "motion/react";
 const Bars = (p) => {
   return (
-    <motion.div
+    <div
       className="bar"
       id={`b${p.id}`}
       style={{
@@ -19,7 +18,7 @@ const Bars = (p) => {
       ></div>
 
       <div style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.id}</div>
-    </motion.div>
+    </div>
   );
 };
 

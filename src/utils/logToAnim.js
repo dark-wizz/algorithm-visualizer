@@ -29,14 +29,13 @@ export const animateLog = (log, codeLen, p) => {
 };
 
 function animCode(l, tl, codeLen){
-  for(let i=0; i<codeLen; i++){
-    tl.to(`#c${i}`,{
-      backgroundColor: bgColor,
-      duration: 0,
-    })
-  }
-
   for(let line of l.lines){
+    for(let i=0; i<codeLen; i++){
+      tl.to(`#c${i}`,{
+        backgroundColor: bgColor,
+        duration: 0,
+      })
+    }
     tl.to(`#c${line-1}`,{backgroundColor: activeColor})
   }
 }

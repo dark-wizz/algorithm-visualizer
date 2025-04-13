@@ -24,18 +24,23 @@ import { bubbleCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography } from "@mui/material";
 
 const Player = (p) => {
-  const { selectedAlgo, setDesc } = useApp();
+  const { selectedAlgo, setDesc, speed, setSpeed} = useApp();
 
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
-  const [speed, setSpeed] = useState(1)
 
   const control = useRef(null);
 
   useEffect(()=>{
     control.current?.seek(time)
   },[time])
+
+  useEffect(()=>{
+    control.current?.revert()
+    setPlaying(false)
+    setTime(0)
+  },[p.size,p.vals, selectedAlgo])
 
   useEffect(()=>{
     if(playing) control.current?.play()
@@ -58,7 +63,12 @@ const Player = (p) => {
     control.current = animateLog(log, algo.length,{
       setTime, setTotalTime, setPlaying
     });
+    control.current?.timeScale(speed)
   },[p.vals, selectedAlgo]);
+
+  useEffect(()=>{
+    control.current?.timeScale(speed)
+  },[speed])
 
   const onPlay = () => {
     setPlaying(p=>!p)
@@ -74,7 +84,6 @@ const Player = (p) => {
 
   const onSpeedSelect = (e) => {
     setSpeed(e.target.value)
-    control.current.timeScale(e.target.value)
   };
 
   const onGen = () => {

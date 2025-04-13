@@ -1,5 +1,6 @@
 import Slider from "@mui/material/Slider";
 import RestartAltOutlinedIcon from "@mui/icons-material/RestartAltOutlined";
+import KeyboardIcon from '@mui/icons-material/Keyboard';
 import SkipPreviousOutlinedIcon from "@mui/icons-material/SkipPreviousOutlined";
 import SkipNextOutlinedIcon from "@mui/icons-material/SkipNextOutlined";
 import AutoFixHighOutlinedIcon from "@mui/icons-material/AutoFixHighOutlined";
@@ -18,7 +19,7 @@ import { useEffect } from "react";
 import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton, Tooltip } from "@mui/material";
 
 const Player = (p) => {
   const { selectedAlgo, setDesc, speed, setSpeed} = useApp();
@@ -42,7 +43,7 @@ const Player = (p) => {
 
   useEffect(()=>{
     if(playing) control.current?.play()
-    else control.current?.pause()
+      else control.current?.pause()
   },[playing])
 
   useEffect(() => {
@@ -119,6 +120,9 @@ const Player = (p) => {
     control.current.seek(t)
     setTime(t)
   };
+  const onCustInp = () => {
+
+  }
   return (
     <div className="player">
       <div className="wrap">
@@ -131,17 +135,15 @@ const Player = (p) => {
             step = {0.000001}
           />
           {totalTime.toFixed(1)}
-        </div>
-        <div className="player_control">
           <FormControl sx={{ minWidth: "3em" }} size="small">
-            <InputLabel id="player_speed_label">speed</InputLabel>
+            <InputLabel id="player_speed">speed</InputLabel>
             <Select
               MenuProps={{
                 PaperProps: {
                   className: "custom-select-menu",
                 },
               }}
-              labelId="player_speed_label"
+              labelId="player_speed"
               id="player_speed"
               label="speed"
               defaultValue={1}
@@ -156,25 +158,44 @@ const Player = (p) => {
               <MenuItem value={3}>3x</MenuItem>
             </Select>
           </FormControl>
+        </div>
+        <div className="player_control">
+          <Tooltip title="custom input" placement="top" arrow>
+            <IconButton onClick={onCustInp}>
+              <KeyboardIcon />
+            </IconButton>
+          </Tooltip>
           <div className="buttons">
-            <div className="reset" onClick={onReset}>
-              <RestartAltOutlinedIcon />
-            </div>
-            <div className="prev" onClick={onPrev}>
-              <SkipPreviousOutlinedIcon />
-            </div>
-            <div className="play" onClick={onPlay}>
-              {!playing && <PlayCircleFilledWhiteOutlinedIcon />}
-              {playing && <PauseCircleOutlineOutlinedIcon />}
-            </div>
-            <div className="next" onClick={onNext}>
-              <SkipNextOutlinedIcon />
-            </div>
-            <div className="gen" onClick={onGen}>
-              <AutoFixHighOutlinedIcon />
-            </div>
-          </div>
-          <FormControl sx={{ width: "5em" }} size="small">
+            <Tooltip title="Reset" placement="top" arrow>
+              <IconButton onClick={onReset}>
+                <RestartAltOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Previous" placement="top" arrow>
+              <IconButton onClick={onPrev}>
+                <SkipPreviousOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title={playing ? "Pause" : "Play"} placement="top" arrow>
+              <IconButton onClick={onPlay}>
+                {!playing ? <PlayCircleFilledWhiteOutlinedIcon /> : <PauseCircleOutlineOutlinedIcon />}
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Next" placement="top" arrow>
+              <IconButton onClick={onNext}>
+                <SkipNextOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Generate" placement="top" arrow>
+              <IconButton onClick={onGen}>
+                <AutoFixHighOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+          </div>          <FormControl sx={{ width: "5em" }} size="small">
             <Box className="sizeBox">
               <Typography>Size</Typography>
               <Slider

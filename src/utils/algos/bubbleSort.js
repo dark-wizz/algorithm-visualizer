@@ -35,7 +35,9 @@ export default function bubbleSort(arr) {
           type: "codeHighlight", lines: [7], vars: { arr: arr, n: n, i: i, j: j, swapped: swapped },
           desc: `Swapping ${arr[j].v} and ${arr[j + 1].v}`
         });
-        logs.push({ type: "swapBars", i: j, i_id: arr[j].i, j: j + 1, j_id: arr[j + 1].i });
+        logs.push({
+          type: "swapBars", i: j, i_id: arr[j].i, j: j + 1, j_id: arr[j + 1].i
+        });
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;

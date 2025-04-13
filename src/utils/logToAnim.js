@@ -1,3 +1,4 @@
+import { useApp } from "../comps/contexts/AppProvider";
 import { bubbleCode } from "./pseudocode";
 import gsap from "gsap";
 
@@ -23,12 +24,12 @@ export const animateLog = (log, codeLen, p) => {
   for (let l of log) {
     if (l.type == "checkBars") animCheckBars(l, tl);
     else if (l.type == "swapBars") animSwapBars(l, tl);
-    else if (l.type == "codeHighlight") animCode(l, tl, codeLen);
+    else if (l.type == "codeHighlight") animCode(l, tl, p.setDesc, codeLen);
   }
   return tl;
 };
 
-function animCode(l, tl, codeLen){
+function animCode(l, tl, setDesc, codeLen){
   for(let line of l.lines){
     for(let i=0; i<codeLen; i++){
       tl.to(`#c${i}`,{
@@ -36,7 +37,10 @@ function animCode(l, tl, codeLen){
         duration: 0,
       })
     }
-    tl.to(`#c${line-1}`,{backgroundColor: activeColor})
+    tl.to(`#c${line-1}`,{
+      backgroundColor: activeColor,
+      onStart: ()=>setDesc(l.desc)
+    })
   }
 }
 

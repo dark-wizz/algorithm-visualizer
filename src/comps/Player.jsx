@@ -59,7 +59,7 @@ const Player = (p) => {
         break;
     }
     control.current = animateLog(log, algo.length,{
-      setTime, setTotalTime, setPlaying
+      setTime, setTotalTime, setPlaying, setDesc
     });
     control.current?.timeScale(speed)
     setSteps(control.current?.getChildren())

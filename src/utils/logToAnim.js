@@ -9,7 +9,6 @@ export const animateLog = (log, codeLen, p) => {
   const tl = gsap.timeline({
     onUpdate:()=>{
       p.setTime(tl.time())
-      p.setTotalTime(tl.totalDuration())
     },
     onComplete: ()=>{
       tl.pause()

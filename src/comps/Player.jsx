@@ -59,10 +59,11 @@ const Player = (p) => {
         break;
     }
     control.current = animateLog(log, algo.length,{
-      setTime, setTotalTime, setPlaying, setDesc
+      setTime, setPlaying, setDesc
     });
     control.current?.timeScale(speed)
     setSteps(control.current?.getChildren())
+    setTotalTime(control.current?.totalDuration())
   },[p.vals, selectedAlgo]);
 
   useEffect(()=>{

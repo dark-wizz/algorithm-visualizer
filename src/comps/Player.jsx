@@ -10,7 +10,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { genRandomArr } from "../utils/funcs";
 import bubbleSort from "../utils/algos/bubbleSort";
 import { animateLog } from "../utils/logToAnim";
 import { useState } from "react";
@@ -18,8 +17,6 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
-import gsap from "gsap";
-import {useGSAP} from "@gsap/react"
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography } from "@mui/material";
 
@@ -29,6 +26,7 @@ const Player = (p) => {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
+  const [steps, setSteps] = useState([])
 
   const control = useRef(null);
 
@@ -64,6 +62,7 @@ const Player = (p) => {
       setTime, setTotalTime, setPlaying
     });
     control.current?.timeScale(speed)
+    setSteps(control.current?.getChildren())
   },[p.vals, selectedAlgo]);
 
   useEffect(()=>{
@@ -74,12 +73,37 @@ const Player = (p) => {
     setPlaying(p=>!p)
   };
 
+  function getCurrentStepIndex() {
+    if(!control.current) return
+    const currentTime = control.current.time();
+    setTime(control.current.time());
+    return steps.findIndex(
+      tween => currentTime > tween.startTime() && currentTime <= tween.endTime()
+    );
+  }
+  
   const onNext = () => {
-    setTime(p => p+1) 
+    if(!control.current) return
+    const currentTime = control.current.time();
+    setTime(control.current.time());
+    const currentIndex = steps.findIndex(
+      tween => currentTime >= tween.startTime() && currentTime < tween.endTime()
+    );
+    if (currentIndex < steps.length - 1) {
+      control.current.tweenTo(steps[currentIndex+1].endTime());
+    }
   };
 
   const onPrev = () => {
-    setTime(p => p-1) 
+    if(!control.current) return
+    const currentTime = control.current.time();
+    setTime(control.current.time());
+    const currentIndex = steps.findIndex(
+      tween => currentTime > tween.startTime() && currentTime <= tween.endTime()
+    );
+    if (currentIndex > 0) {
+      control.current.tweenTo(steps[currentIndex-1].startTime());
+    }
   };
 
   const onSpeedSelect = (e) => {
@@ -92,7 +116,7 @@ const Player = (p) => {
 
   const onReset = () => {
     setPlaying(false)
-    control.current.revert()
+    control.current?.revert()
     setTime(0)
   };
 

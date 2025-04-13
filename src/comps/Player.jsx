@@ -73,15 +73,6 @@ const Player = (p) => {
     setPlaying(p=>!p)
   };
 
-  function getCurrentStepIndex() {
-    if(!control.current) return
-    const currentTime = control.current.time();
-    setTime(control.current.time());
-    return steps.findIndex(
-      tween => currentTime > tween.startTime() && currentTime <= tween.endTime()
-    );
-  }
-  
   const onNext = () => {
     if(!control.current) return
     const currentTime = control.current.time();
@@ -89,7 +80,7 @@ const Player = (p) => {
     const currentIndex = steps.findIndex(
       tween => currentTime >= tween.startTime() && currentTime < tween.endTime()
     );
-    if (currentIndex < steps.length - 1) {
+    if (currentIndex >= 0 && currentIndex < steps.length - 1) {
       control.current.tweenTo(steps[currentIndex+1].endTime());
     }
   };

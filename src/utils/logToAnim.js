@@ -39,7 +39,8 @@ function animCode(l, tl, setDesc, codeLen){
     }
     tl.to(`#c${line-1}`,{
       backgroundColor: activeColor,
-      onStart: ()=>setDesc(l.desc)
+      onStart: ()=>setDesc(l.desc),
+      onReverseComplete: ()=>setDesc(l.desc)
     })
   }
 }

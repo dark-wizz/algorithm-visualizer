@@ -74,6 +74,7 @@ const Player = (p) => {
   };
 
   const onNext = () => {
+    setPlaying(false)
     if(!control.current) return
     const currentTime = control.current.time();
     setTime(control.current.time());
@@ -86,6 +87,7 @@ const Player = (p) => {
   };
 
   const onPrev = () => {
+    setPlaying(false)
     if(!control.current) return
     const currentTime = control.current.time();
     setTime(control.current.time());

@@ -20,6 +20,7 @@ import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography, IconButton, Tooltip } from "@mui/material";
+import CustomInput from "./CustomInput";
 
 const Player = (p) => {
   const { selectedAlgo, setDesc, speed, setSpeed} = useApp();
@@ -28,6 +29,7 @@ const Player = (p) => {
   const [time, setTime] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
   const [steps, setSteps] = useState([])
+  const [openInput, setOpenInput] = useState(false)
 
   const control = useRef(null);
 
@@ -121,9 +123,10 @@ const Player = (p) => {
     setTime(t)
   };
   const onCustInp = () => {
-
+    setOpenInput(true)
   }
-  return (
+  return (<>
+    <CustomInput openInput={openInput} setOpenInput={setOpenInput} />
     <div className="player">
       <div className="wrap">
         <div className="slider">
@@ -136,7 +139,7 @@ const Player = (p) => {
           />
           {totalTime.toFixed(1)}
           <FormControl sx={{ minWidth: "3em" }} size="small">
-            <InputLabel id="player_speed">speed</InputLabel>
+            <InputLabel id="player_speed_label">speed</InputLabel>
             <Select
               MenuProps={{
                 PaperProps: {
@@ -144,7 +147,7 @@ const Player = (p) => {
                 },
               }}
               labelId="player_speed"
-              id="player_speed"
+              id="player_speed_label"
               label="speed"
               defaultValue={1}
               autoWidth
@@ -211,7 +214,7 @@ const Player = (p) => {
         </div>
       </div>
     </div>
-  );
+  </>);
 };
 
 export default Player;

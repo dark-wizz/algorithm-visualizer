@@ -10,17 +10,17 @@ import { useApp } from "./contexts/AppProvider";
 const Display = () => {
   const [vals, setVals] = useState([]);
   const [size, setSize] = useState(10);
-  const [rkey, setRkey] = useState(0);
   const { selectedAlgo } = useApp();
 
   const genVal = () => {
-    setVals(genRandomArr(2, 15, size));
+    const v = genRandomArr(2, 15, size)
+    setVals(v);
   }
 
   useEffect(genVal, [size, selectedAlgo]);
 
   return (
-    <div className="display" key={rkey}>
+    <div className="display" >
       <div
         className="bars"
         style={{
@@ -41,7 +41,6 @@ const Display = () => {
         setSize={setSize}
         vals={vals}
         setVals={setVals}
-        setRkey={setRkey}
       />
       <About />
     </div>

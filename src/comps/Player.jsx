@@ -126,7 +126,10 @@ const Player = (p) => {
     setOpenInput(true)
   }
   return (<>
-    <CustomInput openInput={openInput} setOpenInput={setOpenInput} />
+    <CustomInput
+      openInput={openInput} setOpenInput={setOpenInput}
+      setVals={p.setVals} setSize={p.setSize}
+    />
     <div className="player">
       <div className="wrap">
         <div className="slider">

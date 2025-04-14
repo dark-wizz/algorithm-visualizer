@@ -1,12 +1,25 @@
 import { Label } from "@mui/icons-material";
 import { Dialog, Box, TextField, Typography, Button } from "@mui/material";
+import { useRef } from "react";
 
 const CustomInput = (p) => {
+  const inputRef = useRef()
+  const close = ()=>{
+    p.setOpenInput(false)
+  }
+  const submit = ()=>{
+    const str = inputRef.current.value
+    const numbers = str.split(',').map(num => parseInt(num.trim()));
+    p.setVals(numbers.map((v,k)=>{
+      return {i:k,v:v}
+    }))
+    close()
+  }
   return <>
     <Dialog 
       fullWidth
       open={p.openInput}
-      onClose={()=>p.setOpenInput(false)}
+      onClose={close}
     >
       <Box
         sx={{
@@ -14,7 +27,7 @@ const CustomInput = (p) => {
           display: "grid",
         }}
       >
-        <TextField variant="outlined"
+        <TextField inputRef={inputRef} variant="outlined"
           label="Custom Input"
           id="custInput"
         />
@@ -28,8 +41,12 @@ const CustomInput = (p) => {
         justifyContent: "end",
         gap: "1em"
       }}>
-        <Button color="error" variant="contained">Cancel</Button>
-        <Button color="success" variant="contained">Submit</Button>
+        <Button color="error" variant="contained"
+          onClick={close}
+        >Cancel</Button>
+        <Button color="success" variant="contained"
+          onClick={submit}
+        >Submit</Button>
       </Box>
     </Dialog>
   </>

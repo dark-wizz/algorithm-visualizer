@@ -13,6 +13,9 @@ export default function selectionSort(arr) {
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
     logs.push({
+      type: "newMin", old:arr[minIndex].i, new:arr[minIndex].i
+    })
+    logs.push({
       type: "codeHighlight", lines: [3,4], vars: { arr: arr, n: n, i: i, minIndex: minIndex },
       desc: `Starting pass ${i + 1}, assuming index ${i} (${arr[i].v}) as the minimum.`
     });
@@ -25,7 +28,11 @@ export default function selectionSort(arr) {
       logs.push({ type: "checkBars", i: j, i_id: arr[j].i, j: minIndex, j_id: arr[minIndex].i });
       
       if (arr[j].v < arr[minIndex].v) {
+        const old = minIndex
         minIndex = j;
+        logs.push({
+          type: "newMin", old:arr[old].i, new:arr[minIndex].i
+        })
         logs.push({
           type: "codeHighlight", lines: [7], vars: { arr: arr, n: n, i: i, j: j, minIndex: minIndex },
           desc: `New minimum found at index ${j} (${arr[j].v}). Updating minIndex.`
@@ -39,10 +46,12 @@ export default function selectionSort(arr) {
         desc: `Swapping ${arr[i].v} with new minimum ${arr[minIndex].v}`
       });
       logs.push({ type: "swapBars", i: i, i_id: arr[i].i, j: minIndex, j_id: arr[minIndex].i });
+      logs.push({type: "resetMin", i:arr[minIndex].i})
       let temp = arr[i];
       arr[i] = arr[minIndex];
       arr[minIndex] = temp;
     }
+    logs.push({type: "resetMin", i:arr[minIndex].i})
   }
   
   logs.push({

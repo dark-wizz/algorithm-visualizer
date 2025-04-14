@@ -1,9 +1,9 @@
-import { useApp } from "../comps/contexts/AppProvider";
-import { bubbleCode } from "./pseudocode";
 import gsap from "gsap";
 
-const bgColor = "#010812"
-const activeColor = "#3DF3F120"
+const bgClr = "#010812"
+const activeCodeClr = "#3DF3F120"
+const pickBarClr = "red"
+const mainCol = "#23eded"
 
 export const animateLog = (log, codeLen, p) => {
   const tl = gsap.timeline({
@@ -24,20 +24,31 @@ export const animateLog = (log, codeLen, p) => {
     if (l.type == "checkBars") animCheckBars(l, tl);
     else if (l.type == "swapBars") animSwapBars(l, tl);
     else if (l.type == "codeHighlight") animCode(l, tl, p.setDesc, codeLen);
+    else if (l.type == "newMin") animNewMin(l, tl)
+      else if (l.type == "resetMin") animResetMin(l, tl)
   }
   return tl;
 };
+
+function animNewMin(l, tl){
+  tl.to(`#b${l.old}`, {borderColor:mainCol})
+    .to(`#b${l.new}`, {borderColor:pickBarClr})
+}
+
+function animResetMin(l,tl){
+  tl.to(`#b${l.i}`, {borderColor:mainCol})
+}
 
 function animCode(l, tl, setDesc, codeLen){
   for(let line of l.lines){
     for(let i=0; i<codeLen; i++){
       tl.to(`#c${i}`,{
-        backgroundColor: bgColor,
+        backgroundColor: bgClr,
         duration: 0,
       })
     }
     tl.to(`#c${line-1}`,{
-      backgroundColor: activeColor,
+      backgroundColor: activeCodeClr,
       onStart: ()=>setDesc(l.desc),
       onReverseComplete: ()=>setDesc(l.desc)
     })

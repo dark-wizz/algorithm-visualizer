@@ -7,11 +7,6 @@ const Header = () => {
   return (
     <Box className="header">
       <Select
-        MenuProps={{
-          PaperProps: {
-            className: "custom-select-menu",
-          },
-        }}
         value={selectedAlgo}
         onChange={(e) => setSelectedAlgo(e.target.value)}
       >

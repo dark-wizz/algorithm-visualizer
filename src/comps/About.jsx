@@ -1,3 +1,4 @@
+import { Box, Card, Typography } from "@mui/material";
 import { useApp } from "./contexts/AppProvider";
 
 const About = () => {
@@ -8,14 +9,14 @@ const About = () => {
     selectionSort: "Selection Sort",
   };
   return (
-    <div className="about">
-      <div className="wrap">
-        <h4 className="title" style={{ marginBottom: "0.7em" }}>
+    <Box className="about">
+      <Card className="wrap">
+        <Typography variant="h4" className="title" style={{ marginBottom: "0.7em" }}>
           {algorithms[selectedAlgo]}
-        </h4>
-        <div className="desc">{desc}</div>
-      </div>
-    </div>
+        </Typography>
+        <Typography className="desc">{desc}</Typography>
+      </Card>
+    </Box>
   );
 };
 

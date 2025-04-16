@@ -1,11 +1,11 @@
-import { MenuItem } from "@mui/material";
+import { Box, MenuItem } from "@mui/material";
 import Select from "@mui/material/Select";
 import { useApp } from "./contexts/AppProvider";
 
 const Header = () => {
   const { selectedAlgo, setSelectedAlgo } = useApp();
   return (
-    <div className="header">
+    <Box className="header">
       <Select
         MenuProps={{
           PaperProps: {
@@ -18,7 +18,7 @@ const Header = () => {
         <MenuItem value="bubbleSort">Bubble Sort</MenuItem>
         <MenuItem value="selectionSort">Selection Sort</MenuItem>
       </Select>
-    </div>
+    </Box>
   );
 };
 

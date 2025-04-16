@@ -1,6 +1,8 @@
+import { Box, Paper, Typography } from "@mui/material";
+
 const Bars = (p) => {
   return (
-    <div
+    <Paper
       className="bar"
       id={`b${p.id}`}
       style={{
@@ -8,17 +10,18 @@ const Bars = (p) => {
         textAlign: "center",
       }}
     >
-      <div style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.val}</div>
+      <Typography style={{ fontSize: "0.8em", fontWeight: "bold" }}>
+        {p.val}
+        </Typography>
 
-      <div
+      <Box
         style={{
           fontSize: "1rem",
           height: `${p.val}em`,
         }}
-      ></div>
-
-      <div style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.id}</div>
-    </div>
+      ></Box>
+      <Typography style={{ fontSize: "0.8em", fontWeight: "bold" }}>{p.id}</Typography>
+    </Paper>
   );
 };
 

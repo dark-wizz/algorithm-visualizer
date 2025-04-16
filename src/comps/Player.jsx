@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
-import { Box, Typography, IconButton, Tooltip } from "@mui/material";
+import { Box, Typography, IconButton, Tooltip, Paper, Card } from "@mui/material";
 import CustomInput from "./CustomInput";
 
 const Player = (p) => {
@@ -130,9 +130,9 @@ const Player = (p) => {
       openInput={openInput} setOpenInput={setOpenInput}
       setVals={p.setVals} setSize={p.setSize}
     />
-    <div className="player">
-      <div className="wrap">
-        <div className="slider">
+    <Box className="player">
+      <Card className="wrap">
+        <Box className="slider">
           {time.toFixed(1)}
           <Slider
             max={totalTime.toFixed(1)}
@@ -164,14 +164,14 @@ const Player = (p) => {
               <MenuItem value={3}>3x</MenuItem>
             </Select>
           </FormControl>
-        </div>
-        <div className="player_control">
+        </Box>
+        <Box className="player_control">
           <Tooltip title="custom input" placement="top" arrow>
             <IconButton onClick={onCustInp}>
               <KeyboardIcon />
             </IconButton>
           </Tooltip>
-          <div className="buttons">
+          <Paper className="buttons">
             <Tooltip title="Reset" placement="top" arrow>
               <IconButton onClick={onReset}>
                 <RestartAltOutlinedIcon />
@@ -201,7 +201,8 @@ const Player = (p) => {
                 <AutoFixHighOutlinedIcon />
               </IconButton>
             </Tooltip>
-          </div>          <FormControl sx={{ width: "5em" }} size="small">
+          </Paper>
+          <FormControl sx={{ width: "5em" }} size="small">
             <Box className="sizeBox">
               <Typography>Size</Typography>
               <Slider
@@ -214,9 +215,9 @@ const Player = (p) => {
               />
             </Box>
           </FormControl>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Card>
+    </Box>
   </>);
 };
 

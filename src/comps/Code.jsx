@@ -1,3 +1,4 @@
+import { Card, Box, Typography } from "@mui/material";
 import { bubbleCode, selectionCode } from "../utils/pseudocode.js";
 import { useApp } from "./contexts/AppProvider.jsx";
 
@@ -14,17 +15,17 @@ const Code = () => {
       break;
   }
   return (
-    <div className="code">
-      <div className="wrap">
+    <Box className="code">
+      <Card className="wrap">
         {currCode.map((v, i) => {
           return (
-            <pre id={`c${i}`} key={i}>
+            <Typography component="pre" id={`c${i}`} key={i}>
               {i + 1} {v}
-            </pre>
+            </Typography>
           );
         })}
-      </div>
-    </div>
+      </Card>
+    </Box>
   );
 };
 

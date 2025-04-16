@@ -18,3 +18,28 @@ body,
   padding: 0;
   height: 100%;
 }
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.display{
+  display: grid;
+  grid-auto-flow: column;
+  align-items: end;
+  gap: 2em;
+  place-content: center;
+}
+
+.bar{
+  width: 1.5em;
+  text-align: center;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  grid-template-rows: 75% 25%;
+  gap: 1em;
+}

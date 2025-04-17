@@ -21,6 +21,7 @@ import selectionSort from "../utils/algos/selectionSort";
 import { bubbleCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography, IconButton, Tooltip, Paper, Card } from "@mui/material";
 import CustomInput from "./CustomInput";
+import { Bolt } from "@mui/icons-material";
 
 const Player = (p) => {
   const { selectedAlgo, setDesc, speed, setSpeed} = useApp();
@@ -104,7 +105,9 @@ const Player = (p) => {
   };
 
   const onSpeedSelect = (e) => {
-    setSpeed(e.target.value)
+    let spd = e.target.value
+    if(spd==-1) spd=totalTime/2
+    setSpeed(spd)
   };
 
   const onGen = () => {
@@ -162,6 +165,7 @@ const Player = (p) => {
               <MenuItem value={1.5}>1.5x</MenuItem>
               <MenuItem value={2}>2x</MenuItem>
               <MenuItem value={3}>3x</MenuItem>
+              <MenuItem value={-1}><Bolt /> </MenuItem>
             </Select>
           </FormControl>
         </Box>

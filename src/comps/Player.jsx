@@ -204,7 +204,7 @@ const Player = (p) => {
           </Paper>
           <FormControl sx={{ width: "5em" }} size="small">
             <Box className="sizeBox">
-              <Typography>Size</Typography>
+              <Typography>size</Typography>
               <Slider
                 max={25}
                 min={1}

@@ -6,7 +6,7 @@ const Bars = (p) => {
       className="bar"
       id={`b${p.id}`}
     >
-      <Typography>
+      <Typography sx={{fontSize: "0.5em"}}>
         {p.val}
         </Typography>
 
@@ -15,7 +15,7 @@ const Bars = (p) => {
           height: `${p.val}em`,
         }}
       ></Box>
-      <Typography>{p.id}</Typography>
+      <Typography sx={{fontSize: "0.5em"}}>{p.id}</Typography>
     </Paper>
   );
 };

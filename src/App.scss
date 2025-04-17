@@ -179,6 +179,23 @@ body,
   border-style: solid;
 }
 
+.header{
+  border: 1px solid var(--mainCol);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+//anim background
+
 :root{
   --gird-width:30px;
   --gird-height:30px;

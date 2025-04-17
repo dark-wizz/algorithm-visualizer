@@ -39,6 +39,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backdropFilter: 'blur(10px)', // Apply blur effect
+        },
+      },
+    },
     MuiPaper:{
       defaultProps:{
         elevation: 10,
@@ -49,7 +56,6 @@ const theme = createTheme({
           background: paperClr,
         }
       }
-      
     }
   }
 });

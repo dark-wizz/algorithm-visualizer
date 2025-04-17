@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -20,26 +22,231 @@ body,
 }
 
 .app {
+  height: 100%;
   display: grid;
   grid-template-rows: auto 1fr;
-}
-
-.display{
-  display: grid;
-  grid-auto-flow: column;
-  align-items: end;
-  gap: 2em;
-  place-content: center;
-}
-
-.bar{
-  width: 1.5em;
-  text-align: center;
+  padding: 0.5em;
+  gap: 1em;
 }
 
 .body {
-  display: grid;
-  grid-template-columns: 65% 35%;
-  grid-template-rows: 75% 25%;
+  max-height: 100%;
   gap: 1em;
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+  grid-template-rows: 5fr 2fr;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.body>*,
+.header {
+  border-radius: 10px;
+  display: grid;
+  place-content: center;
+  padding: 0.5em;
+
+  //oveflow fix
+  height: 0;
+  min-height: 100%;
+  overflow: scroll;
+}
+
+.header {
+  padding: 1em;
+}
+
+.control {
+  grid-template-rows: 1fr auto;
+  height: 100%;
+  place-items: center;
+}
+
+.player {
+  .wrap {
+    display: grid;
+    grid-template-columns: 130%;
+    grid-template-rows: 1fr 1fr;
+    place-content: center;
+    place-items: center;
+  }
+}
+
+.slider {
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+  place-items: center;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5em;
+}
+
+.player .MuiSlider-root {
+  height: 4px;
+  // color: var(--mainCol); // track color
+
+  .MuiSlider-thumb {
+    height: 10px;
+    width: 10px;
+    // color: var(--mainCol); //thumb color
+
+    &.Mui-focusVisible {
+      box-shadow: 0 0 0 8px rgba(0, 0, 0, 0.16);
+    }
+
+    &:hover {
+      // box-shadow: 0 0 8px var(--mainCol); //for glow effect
+    }
+  }
+
+  //rail color
+  .MuiSlider-rail {
+    // color: var(--railCol)
+  }
+
+  .Mui-active {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+.display {
+  display: flex;
+  gap: 1em;
+  align-items: flex-end;
+}
+
+.player .player_control {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+
+  .buttons {
+    // border: 2px solid var(--mainCol); //for theme
+    // color: var(--mainCol); //for theme
+    border-radius: 10px;
+    padding: 0.5em 1em;
+    display: grid;
+    grid-auto-flow: column;
+    place-items: center;
+    gap: 1em;
+
+    >*:hover {
+      // filter: drop-shadow(0 0 3px var(--mainCol)); //for theme
+      cursor: pointer;
+    }
+  }
+}
+
+
+.player_control {
+
+  //speed control color 
+  .MuiInputLabel-root {
+    // color: var(--mainCol);
+    // text-shadow: 0 0 5px var(--mainCol);
+  }
+
+  .MuiOutlinedInput-root {
+    // color: var(--mainCol);
+    font-weight: bold;
+    // text-shadow: 0 0 5px var(--mainCol);
+
+    .MuiSvgIcon-root {
+      // color: var(--mainCol);
+      // filter: drop-shadow(0 0 5px var(--mainCol));
+    }
+
+    .MuiOutlinedInput-notchedOutline {
+      // border: 2px solid var(--mainCol);
+    }
+
+    &:hover .MuiOutlinedInput-notchedOutline {
+      // border: 2px solid var(--mainCol);
+      // box-shadow: 0 0 5px var(--mainCol);
+    }
+  }
+
+  //size input color
+  .MuiInput-root {
+    // color: var(--mainCol);
+  }
+
+  .MuiInputBase-input {
+    // border-bottom: 2px solid var(--mainCol);
+  }
+
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.code {
+  >* {
+    font-weight: bold;
+    font-size: 1.14em;
+    overflow: scroll;
+  }
+
+  pre {
+    font-size: .9rem;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    margin: .3rem;
+    padding: .2rem;
+  }
+}
+
+.about {
+  place-content: stretch;
+
+  .wrap {
+    padding: 1em;
+
+    * {
+      margin: 0;
+    }
+  }
+}
+
+//for texts 
+.wrap {
+  // color: var(--textCol);
+}
+
+//for Desc text masking 
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  // background-image: linear-gradient(var(--mainCol), #ffffff);
+  // -webkit-text-fill-color: transparent;
+  // -webkit-background-clip: text;
+}
+
+//for bar's appearance
+.bar {
+  // border: 2px solid var(--mainCol);
+  // background: linear-gradient(to bottom, var(--barCol) 50%, var(--railCol) 90%);
+  // border-radius: 3px;
+  // color: white;
+  // text-shadow: 0 0 5px #000000;
+}
+
+.desc {
+  font-weight: bold;
+}
+
+.sizeBox {
+  display: grid;
+  align-items: center;
+  // color: var(--mainCol);
+  // text-shadow: 0 0 5px var(--mainCol);
+}
+
+.bar {
+  width: 1em;
+  text-align: center;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
 }

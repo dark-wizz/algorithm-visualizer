@@ -15,17 +15,23 @@ const Code = () => {
       break;
   }
   return (
-    <Box className="code">
-      <Card className="wrap">
+    <Card className="code">
+      <Box className="wrap">
         {currCode.map((v, i) => {
           return (
-            <Typography component="pre" id={`c${i}`} key={i}>
-              {i + 1} {v}
-            </Typography>
-          );
+            <Typography component="pre"
+              sx={{
+                fontFamily:"JetBrains Mono",
+                fontSize: "0.6em !important"
+              }}
+              id={`c${i}`} key={i}
+            >
+                {i + 1} {v}
+              </Typography>
+            );
         })}
-      </Card>
-    </Box>
+      </Box>
+    </Card>
   );
 };
 

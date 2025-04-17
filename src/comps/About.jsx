@@ -9,14 +9,14 @@ const About = () => {
     selectionSort: "Selection Sort",
   };
   return (
-    <Box className="about">
-      <Card className="wrap">
+    <Card className="about">
+      <Box className="wrap">
         <Typography variant="h4" className="title" style={{ marginBottom: "0.7em" }}>
           {algorithms[selectedAlgo]}
         </Typography>
         <Typography className="desc">{desc}</Typography>
-      </Card>
-    </Box>
+      </Box>
+    </Card>
   );
 };
 

@@ -1,6 +1,8 @@
 import { createTheme } from '@mui/material/styles';
 
 const primaryClr = '#23eded'
+const paperClr = '#010812'
+const bgClr = 'rgb(0, 11, 26)'
 
 const theme = createTheme({
   palette: {
@@ -8,26 +10,9 @@ const theme = createTheme({
     primary: {
       main: '#ffffff',
     },
-  },
-  components: {
-    MuiIconButton: {
-      styleOverrides: {
-        root: {
-          color: primaryClr, 
-        },
-      },
-    },
-    MuiTooltip: {
-      styleOverrides: {
-        tooltip: {
-          backgroundColor: '#ffffff',
-          color: '#000000',
-          fontSize: '0.8rem',
-        },
-        arrow: {
-          color: '#ffffff',
-        },
-      },
+    background: {
+      default: bgClr,
+      paper: bgClr,
     },
   },
 });

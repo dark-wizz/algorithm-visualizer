@@ -130,8 +130,8 @@ const Player = (p) => {
       openInput={openInput} setOpenInput={setOpenInput}
       setVals={p.setVals} setSize={p.setSize}
     />
-    <Box className="player">
-      <Card className="wrap">
+    <Card className="player">
+      <Box className="wrap">
         <Box className="slider">
           {time.toFixed(1)}
           <Slider
@@ -216,8 +216,8 @@ const Player = (p) => {
             </Box>
           </FormControl>
         </Box>
-      </Card>
-    </Box>
+      </Box>
+    </Card>
   </>);
 };
 

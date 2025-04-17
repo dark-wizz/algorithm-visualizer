@@ -1,7 +1,8 @@
 import gsap from "gsap";
 
 const bgClr = "#010812"
-const activeCodeClr = "#3DF3F120"
+const activeCodeClr ="rgba(61, 243, 240, 0.30)"
+const activeCodeFontClr ="rgba(61, 243, 240)"
 const pickBarClr = "red"
 const mainCol = "#23eded"
 
@@ -31,24 +32,27 @@ export const animateLog = (log, codeLen, p) => {
 };
 
 function animNewMin(l, tl){
-  tl.to(`#b${l.old}`, {borderColor:mainCol})
+  tl.to(`#b${l.old}`, {borderColor:"white"})
     .to(`#b${l.new}`, {borderColor:pickBarClr})
 }
 
 function animResetMin(l,tl){
-  tl.to(`#b${l.i}`, {borderColor:mainCol})
+  tl.to(`#b${l.i}`, {borderColor:"white"})
 }
 
 function animCode(l, tl, setDesc, codeLen){
   for(let line of l.lines){
     for(let i=0; i<codeLen; i++){
       tl.to(`#c${i}`,{
-        backgroundColor: bgClr,
+        backgroundColor: "transparent",
+        color: "white",
         duration: 0,
       })
     }
     tl.to(`#c${line-1}`,{
-      backgroundColor: activeCodeClr,
+        color: activeCodeFontClr,
+        borderRadius: "5px",
+        backgroundColor: activeCodeClr,
       onStart: ()=>setDesc(l.desc),
       onReverseComplete: ()=>setDesc(l.desc)
     })
@@ -58,10 +62,10 @@ function animCode(l, tl, setDesc, codeLen){
 function animSwapBars(l, tl){
   let dist = l.j - l.i;
   tl.to(`#b${l.i_id}`,{
-    x: `+=${dist*2}em`
+    xPercent: `+=${dist*200}`
   })
   tl.to(`#b${l.j_id}`,{
-    x: `+=${dist*-2}em`
+    xPercent: `+=${dist*-200}`
   }, "<")
 }
 

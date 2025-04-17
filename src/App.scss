@@ -97,12 +97,6 @@ body,
       // box-shadow: 0 0 8px var(--mainCol); //for glow effect
     }
   }
-
-  //rail color
-  .MuiSlider-rail {
-    // color: var(--railCol)
-  }
-
   .Mui-active {
     height: 18px;
     width: 18px;
@@ -121,8 +115,6 @@ body,
   gap: 1em;
 
   .buttons {
-    // border: 2px solid var(--mainCol); //for theme
-    // color: var(--mainCol); //for theme
     border-radius: 10px;
     padding: 0.5em 1em;
     display: grid;
@@ -166,15 +158,6 @@ body,
     }
   }
 
-  //size input color
-  .MuiInput-root {
-    // color: var(--mainCol);
-  }
-
-  .MuiInputBase-input {
-    // border-bottom: 2px solid var(--mainCol);
-  }
-
 }
 
 ::-webkit-scrollbar {
@@ -209,27 +192,10 @@ body,
   }
 }
 
-//for texts 
-.wrap {
-  // color: var(--textCol);
-}
 
-//for Desc text masking 
 .title {
   font-size: 1.5rem;
   font-weight: bold;
-  // background-image: linear-gradient(var(--mainCol), #ffffff);
-  // -webkit-text-fill-color: transparent;
-  // -webkit-background-clip: text;
-}
-
-//for bar's appearance
-.bar {
-  // border: 2px solid var(--mainCol);
-  // background: linear-gradient(to bottom, var(--barCol) 50%, var(--railCol) 90%);
-  // border-radius: 3px;
-  // color: white;
-  // text-shadow: 0 0 5px #000000;
 }
 
 .desc {
@@ -239,14 +205,12 @@ body,
 .sizeBox {
   display: grid;
   align-items: center;
-  // color: var(--mainCol);
-  // text-shadow: 0 0 5px var(--mainCol);
 }
 
 .bar {
   width: 1em;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 10%;
   border-width: 1px;
   border-style: solid;
 }

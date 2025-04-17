@@ -22,7 +22,6 @@ const Code = () => {
             <Typography component="pre"
               sx={{
                 fontFamily:"JetBrains Mono",
-                fontSize: "0.6em !important"
               }}
               id={`c${i}`} key={i}
             >

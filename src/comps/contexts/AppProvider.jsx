@@ -4,7 +4,7 @@ const AppContext = createContext();
 
 export default function DescProvider({children}){
   const [speed, setSpeed] = useState(1)
-  const [desc, setDesc] = useState("")
+  const [desc, setDesc] = useState("Start playing")
   const [selectedAlgo,setSelectedAlgo] = useState("bubbleSort")
   return <AppContext.Provider value={{speed, setSpeed, selectedAlgo, setSelectedAlgo, desc, setDesc}}>
     {children}

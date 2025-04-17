@@ -4,7 +4,7 @@ const bgClr = "#010812"
 const activeCodeClr ="rgba(61, 243, 240, 0.30)"
 const activeCodeFontClr ="rgba(61, 243, 240)"
 const pickBarClr = "red"
-const mainCol = "#23eded"
+const mainClr = "#23eded"
 
 export const animateLog = (log, codeLen, p) => {
   const tl = gsap.timeline({
@@ -32,12 +32,12 @@ export const animateLog = (log, codeLen, p) => {
 };
 
 function animNewMin(l, tl){
-  tl.to(`#b${l.old}`, {borderColor:"white"})
+  tl.to(`#b${l.old}`, {borderColor:mainClr})
     .to(`#b${l.new}`, {borderColor:pickBarClr})
 }
 
 function animResetMin(l,tl){
-  tl.to(`#b${l.i}`, {borderColor:"white"})
+  tl.to(`#b${l.i}`, {borderColor:mainClr})
 }
 
 function animCode(l, tl, setDesc, codeLen){

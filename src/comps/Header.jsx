@@ -9,6 +9,12 @@ import { Typewriter } from "react-simple-typewriter";
 
 const Header = () => {
   const { selectedAlgo, setSelectedAlgo } = useApp();
+
+  const toggleMotion = ()=>{
+    const bg = document.querySelector(".grid-bg")
+    bg.classList.toggle("anim")
+  }
+
   return (
     <Paper className="header"
       sx={{
@@ -25,7 +31,7 @@ const Header = () => {
           cursorColor="#23eded"
         >
         </Typewriter>
-        </Box>
+      </Box>
       <Box
         className="center"
       >
@@ -51,16 +57,18 @@ const Header = () => {
         </Select>
       </Box>
       <Box className="right">
-        <Tooltip title="Reduce Motion" placement="bottom" arrow>
-          <IconButton>
+        <Tooltip title="Toggle Motion" placement="bottom" arrow>
+          <IconButton onClick={toggleMotion}>
             <AccessibilityNewOutlined />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Source Code" placement="bottom" arrow>
-          <IconButton>
-            <GitHub />
-          </IconButton>
-        </Tooltip>
+        <a href="https://github.com/dark-wizz/algorithm-visualizer.git" target="_blank">
+          <Tooltip title="Source Code" placement="bottom" arrow>
+            <IconButton>
+              <GitHub />
+            </IconButton>
+          </Tooltip>
+        </a>
       </Box>
     </Paper>
   );

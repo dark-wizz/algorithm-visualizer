@@ -7,6 +7,7 @@ const Header = () => {
   return (
     <Box className="header">
       <Select
+        variant="standard"
         value={selectedAlgo}
         onChange={(e) => setSelectedAlgo(e.target.value)}
       >

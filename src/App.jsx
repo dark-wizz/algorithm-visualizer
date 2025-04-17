@@ -6,12 +6,16 @@ import { Box } from "@mui/material";
 
 const App = () => {
   return (
-    <Box className="app">
-      <AppProvider>
-        <Header />
-        <Body />
-      </AppProvider>
-    </Box>
+    <div class="grid-bg ba-grid anim">
+      <div class="inner">
+        <Box className="app">
+          <AppProvider>
+            <Header />
+            <Body />
+          </AppProvider>
+        </Box>
+      </div>
+    </div>
   );
 };
 

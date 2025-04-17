@@ -1,7 +1,7 @@
 import { createTheme } from '@mui/material/styles';
 
 const primaryClr = '#3df3f0'
-const paperClr = "#010812"
+const paperClr = "#01081280"
 const bgClr ='#00060f'
 const primarBorderClr = "#3df3f0"
 const hoverClr = "#23eded"
@@ -46,9 +46,10 @@ const theme = createTheme({
       styleOverrides:{
         root:{
           border: `1px solid ${primarBorderClr}`,
-          background: paperClr
+          background: paperClr,
         }
       }
+      
     }
   }
 });

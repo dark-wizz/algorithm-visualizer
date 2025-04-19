@@ -1,12 +1,17 @@
 import { Box, Card, Container } from "@mui/material"
 import Bar from "./Bar"
 
-const Display = (P) => {
-return <Card
+const Display = (p) => {
+  const max = Math.max(...p.vals.map((v,_)=>v.v))
+  return <Card
     className="display"
+    sx={{
+      paddingTop: "4em"
+    }}
   >
-    {P.vals.map((v, k) => (
-      <Bar val={v.v} id={k} key={k} />
+    {p.vals.map((v, k) => (
+      <Bar val={v.v} id={k} key={k} max={max}
+      />
     ))}
   </Card>
 }

@@ -54,6 +54,7 @@ const Header = () => {
         >
           <MenuItem value="bubbleSort">Bubble Sort</MenuItem>
           <MenuItem value="selectionSort">Selection Sort</MenuItem>
+          <MenuItem value="insertionSort">Insertion Sort</MenuItem>
         </Select>
       </Box>
       <Box className="right">

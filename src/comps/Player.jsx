@@ -18,7 +18,7 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import { useApp } from "./contexts/AppProvider";
 import selectionSort from "../utils/algos/selectionSort";
-import { bubbleCode, selectionCode } from "../utils/pseudocode";
+import { bubbleCode, insertionCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography, IconButton, Tooltip, Paper, Card } from "@mui/material";
 import CustomInput from "./CustomInput";
 import { Bolt } from "@mui/icons-material";
@@ -55,12 +55,16 @@ const Player = (p) => {
     let algo;
     switch (selectedAlgo) {
       case "bubbleSort":
-        log = insertionSort([...p.vals]);
+        log = bubbleSort([...p.vals]);
         algo = bubbleCode
         break;
       case "selectionSort":
         log = selectionSort([...p.vals]);
         algo = selectionCode
+        break;
+      case "insertionSort":
+        log = insertionSort([...p.vals]);
+        algo = insertionCode
         break;
     }
     control.current = animateLog(log, algo.length,{

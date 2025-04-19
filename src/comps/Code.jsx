@@ -1,5 +1,5 @@
 import { Card, Box, Typography } from "@mui/material";
-import { bubbleCode, selectionCode } from "../utils/pseudocode.js";
+import { bubbleCode, insertionCode, selectionCode } from "../utils/pseudocode.js";
 import { useApp } from "./contexts/AppProvider.jsx";
 
 const Code = () => {
@@ -12,6 +12,9 @@ const Code = () => {
       break;
     case "selectionSort":
       currCode = selectionCode;
+      break;
+    case "insertionSort":
+      currCode = insertionCode;
       break;
   }
   return (

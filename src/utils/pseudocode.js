@@ -30,3 +30,16 @@ export const selectionCode = [
   "END FUNCTION"
 ]
 
+
+export const insertionCode = [
+  "FUNCTION insertionSort(arr):",
+  "  n ← length of arr",
+  "  FOR i FROM 1 TO n - 1:",
+  "    j ← i",
+  "    WHILE j > 0 AND arr[j].v < arr[j - 1].v:",
+  "      SWAP arr[j] WITH arr[j - 1]",
+  "      j ← j - 1",
+  "    END WHILE",
+  "  END FOR",
+  "END FUNCTION"
+]

@@ -144,7 +144,7 @@ const Player = (p) => {
           {time.toFixed(1)}
           <Slider
             max={totalTime.toFixed(1)}
-            value={time}
+            value={time.toFixed(1)}
             onChange={onSlide} 
             step = {0.000001}
           />

@@ -13,7 +13,7 @@ const Body = () => {
   const { selectedAlgo } = useApp();
 
   const genVal = () => {
-    const v = genRandomArr(2, 15, size)
+    const v = genRandomArr(2, 99, size)
     setVals(v);
   }
 

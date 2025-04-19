@@ -25,13 +25,13 @@ export const animateLog = (log, codeLen, p) => {
     if (l.type == "checkBars") animCheckBars(l, tl);
     else if (l.type == "swapBars") animSwapBars(l, tl);
     else if (l.type == "codeHighlight") animCode(l, tl, p.setDesc, codeLen);
-    else if (l.type == "newMin") animNewMin(l, tl)
+    else if (l.type == "pick") animPick(l, tl)
       else if (l.type == "resetMin") animResetMin(l, tl)
   }
   return tl;
 };
 
-function animNewMin(l, tl){
+function animPick(l, tl){
   tl.to(`#b${l.old}`, {borderColor:mainClr})
     .to(`#b${l.new}`, {borderColor:pickBarClr})
 }

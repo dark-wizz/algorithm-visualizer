@@ -13,7 +13,7 @@ export default function selectionSort(arr) {
   for (let i = 0; i < n - 1; i++) {
     let minIndex = i;
     logs.push({
-      type: "newMin", old:arr[minIndex].i, new:arr[minIndex].i
+      type: "pick", old:arr[minIndex].i, new:arr[minIndex].i
     })
     logs.push({
       type: "codeHighlight", lines: [3,4], vars: { arr: arr, n: n, i: i, minIndex: minIndex },
@@ -31,7 +31,7 @@ export default function selectionSort(arr) {
         const old = minIndex
         minIndex = j;
         logs.push({
-          type: "newMin", old:arr[old].i, new:arr[minIndex].i
+          type: "pick", old:arr[old].i, new:arr[minIndex].i
         })
         logs.push({
           type: "codeHighlight", lines: [7], vars: { arr: arr, n: n, i: i, j: j, minIndex: minIndex },

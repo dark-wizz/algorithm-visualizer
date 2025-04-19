@@ -1,11 +1,16 @@
-function insertionSort(arr) {
-    for (let i = 1; i < arr.length; i++) {
-        let key = arr[i];
-        let j = i - 1;
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
-            j = j - 1;
+export default function insertionSort(arr) {
+    let logs = []
+    let n = arr.length
+
+    for (let i = 1; i < n; i++) {
+        let j = i;
+        while (j > 0 && arr[j].v < arr[j - 1].v) {
+            logs.push({ type: "swapBars", i: j-1, i_id: arr[j-1].i, j: j, j_id: arr[j].i });
+            let temp = arr[j]
+            arr[j] = arr[j - 1]
+            arr[j - 1] = temp
+            j--
         }
-        arr[j + 1] = key;
     }
+    return logs
 }

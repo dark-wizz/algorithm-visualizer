@@ -22,6 +22,7 @@ import { bubbleCode, selectionCode } from "../utils/pseudocode";
 import { Box, Typography, IconButton, Tooltip, Paper, Card } from "@mui/material";
 import CustomInput from "./CustomInput";
 import { Bolt } from "@mui/icons-material";
+import insertionSort from "../utils/algos/insertionSort";
 
 const Player = (p) => {
   const { selectedAlgo, setDesc, speed, setSpeed} = useApp();
@@ -54,7 +55,7 @@ const Player = (p) => {
     let algo;
     switch (selectedAlgo) {
       case "bubbleSort":
-        log = bubbleSort([...p.vals]);
+        log = insertionSort([...p.vals]);
         algo = bubbleCode
         break;
       case "selectionSort":

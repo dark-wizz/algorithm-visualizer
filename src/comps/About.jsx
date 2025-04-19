@@ -7,6 +7,7 @@ const About = () => {
   const algorithms = {
     bubbleSort: "Bubble Sort",
     selectionSort: "Selection Sort",
+    insertionSort: "Insertion Sort",
   };
   return (
     <Paper className="about">
